@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <meta name="theme-color" content="#10b981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Akhirah Assets">
+    
+    <!-- PWA Manifest (Embedded) -->
+    <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAiQWtoaXJhaCBBc3NldHMiLAogICAgInNob3J0X25hbWUiOiAiQWtoaXJhaCIsCiAgICAic3RhcnRfdXJsIjogIi4iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWNmZGY1IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMTBiOTgxIiwKICAgICJpY29ucyI6IFsKICAgICAgewogICAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnS1wbmcuZmxhdGljb24uY29tLzUxMi8yOTA3LzI5MDcyNTMucG5nIiwKICAgICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICB9CiAgICBdCn0=">
+
     <title>Akhirah Assets - বিশ্লেষণ সহ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -111,33 +121,80 @@
             background-color: rgba(239, 68, 68, 0.05);
         }
 
-        /* Crescent Moon Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
+        /* Toast Notification - Updated (Bottom Large) */
+        @keyframes toastSlideUp {
+            0% { transform: translate(-50%, 100%); opacity: 0; }
+            10% { transform: translate(-50%, 0); opacity: 1; }
+            90% { transform: translate(-50%, 0); opacity: 1; }
+            100% { transform: translate(-50%, 150%); opacity: 0; }
         }
         
-        @keyframes glow {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+        .toast {
+            position: fixed;
+            bottom: 100px; /* উপরে উঠে আসবে */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 50px;
+            z-index: 1000;
+            font-weight: bold;
+            font-size: 1.25rem; /* বড় ফন্ট */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: toastSlideUp 2.5s ease-in-out forwards;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            text-align: center;
+            min-width: 250px;
         }
-        
-        .crescent {
+
+        /* Modern Confetti Explosion */
+        .confetti-particle {
             position: absolute;
-            background: radial-gradient(circle at 70% 30%, #FFD700, #FFA500);
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            z-index: 999;
             border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
-            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
-            z-index: 35;
         }
 
         /* Analysis Grid */
         .analysis-card {
             height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;
             border-radius: 16px; transition: all 0.3s; cursor: pointer;
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(31, 38, 135, 0.05);
+        }
+        html.dark .analysis-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
         .analysis-card:hover { transform: translateY(-5px); }
-        .analysis-card i { font-size: 28px; margin-bottom: 10px; }
+        .analysis-card i { 
+            font-size: 28px; 
+            margin-bottom: 10px; 
+            color: #10b981; 
+        }
+        html.dark .analysis-card i { 
+            color: #34d399; 
+        }
+        .analysis-card h3 {
+            font-weight: bold;
+            color: #333;
+        }
+        html.dark .analysis-card h3 {
+            color: #e2e8f0;
+        }
+        .analysis-card p {
+            color: #666;
+        }
+        html.dark .analysis-card p {
+            color: #94a3b8;
+        }
 
         /* Calendar Styles */
         .calendar-day {
@@ -152,7 +209,7 @@
 </head>
 <body class="h-screen flex flex-col relative">
 
-    <!-- PHONE USAGE MODAL (Must show first) -->
+    <!-- PHONE USAGE MODAL -->
     <div id="phoneUsageModal" class="fixed inset-0 bg-white dark:bg-[#0f172a] z-[200] flex flex-col items-center justify-center p-6">
         <div class="w-full max-w-md">
             <div class="text-center mb-8">
@@ -195,7 +252,7 @@
         </div>
     </div>
 
-    <!-- MAIN APP CONTAINER (Hidden initially) -->
+    <!-- MAIN APP CONTAINER -->
     <div id="mainAppContainer" class="hidden h-screen flex flex-col">
 
     <!-- MAIN SCROLLABLE CONTAINER -->
@@ -209,12 +266,10 @@
                     <h1 class="text-xl font-bold">আমার আমলনামা</h1>
                 </div>
                 <div class="flex items-center gap-3">
-                    <!-- INBOX ICON -->
                     <button onclick="openInboxModal()" class="relative bg-white/20 backdrop-blur w-9 h-9 rounded-full border border-white/30 flex items-center justify-center active:scale-95 hover:bg-white/30 transition">
                         <i class="fas fa-envelope text-white text-sm"></i>
                         <span id="inboxIndicator" class="hidden unread-dot"></span>
                     </button>
-                    <!-- THEME ICON -->
                     <button onclick="toggleTheme()" class="bg-white/20 backdrop-blur w-9 h-9 rounded-full border border-white/30 flex items-center justify-center active:scale-95 hover:bg-white/30 transition">
                         <i id="themeIcon" class="fas fa-moon text-white text-xs"></i>
                     </button>
@@ -300,9 +355,14 @@
              </button>
         </div>
 
-        <!-- STATS -->
-        <div id="view-stats" class="hidden p-5 anim-fade pb-24 h-full flex flex-col justify-start pt-10">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6 text-center">পরিসংখ্যান</h2>
+        <!-- STATS (Now Live Graph in Analysis) -->
+        <div id="view-stats" class="hidden p-5 anim-fade pb-24 h-full flex flex-col justify-start pt-5">
+            <div class="flex justify-between items-center mb-4">
+                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-purple-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
+                <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 text-center">লাইভ গ্রাফ</h2>
+                <div class="w-8"></div>
+            </div>
+            
             <div class="bg-white p-4 rounded-xl shadow-lg border mb-6">
                 <div class="flex items-center gap-2 mb-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span><h3 class="text-sm font-bold text-gray-500">নেকি অর্জনের গ্রাফ</h3></div>
                 <canvas id="nekiChart"></canvas>
@@ -322,43 +382,44 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <div onclick="navigateToAnalysis('attendance')" class="analysis-card bg-gradient-to-br from-green-100 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-900/10 border border-emerald-200 dark:border-emerald-800">
-                    <i class="fas fa-calendar-check text-emerald-600 dark:text-emerald-400"></i>
+                <div onclick="navigateToAnalysis('attendance')" class="analysis-card">
+                    <i class="fas fa-calendar-check"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">উপস্থিতি</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">মাসিক ক্যালেন্ডার</p>
                 </div>
-                <div onclick="navigateToAnalysis('progress')" class="analysis-card bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/10 border border-blue-200 dark:border-blue-800">
-                    <i class="fas fa-chart-line text-blue-600 dark:text-blue-400"></i>
+                <!-- LIVE GRAPH Added Here -->
+                <div onclick="navigateToAnalysis('stats')" class="analysis-card">
+                    <i class="fas fa-chart-area"></i>
+                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">লাইভ গ্রাফ</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">পরিসংখ্যান দেখুন</p>
+                </div>
+                <div onclick="navigateToAnalysis('progress')" class="analysis-card">
+                    <i class="fas fa-chart-line"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">অগ্রগতি</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">সাপ্তাহিক/মাসিক গ্রাফ</p>
                 </div>
-                <div onclick="navigateToAnalysis('history')" class="analysis-card bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/10 border border-purple-200 dark:border-purple-800">
-                    <i class="fas fa-history text-purple-600 dark:text-purple-400"></i>
+                <div onclick="navigateToAnalysis('history')" class="analysis-card">
+                    <i class="fas fa-history"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">ইতিহাস</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">নেকি ও জার্নাল</p>
                 </div>
-                <div onclick="navigateToAnalysis('targets')" class="analysis-card bg-gradient-to-br from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/10 border border-orange-200 dark:border-orange-800">
-                    <i class="fas fa-bullseye text-orange-600 dark:text-orange-400"></i>
+                <div onclick="navigateToAnalysis('targets')" class="analysis-card">
+                    <i class="fas fa-bullseye"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">টার্গেট</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">পূরন/মিস রেকর্ড</p>
                 </div>
-                <div onclick="navigateToAnalysis('time')" class="analysis-card bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/10 border border-teal-200 dark:border-teal-800">
-                    <i class="fas fa-clock text-teal-600 dark:text-teal-400"></i>
+                <div onclick="navigateToAnalysis('time')" class="analysis-card">
+                    <i class="fas fa-clock"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সময় ব্যয়</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">তাসবীহ সময়</p>
                 </div>
-                <div onclick="navigateToAnalysis('improvement')" class="analysis-card bg-gradient-to-br from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/10 border border-indigo-200 dark:border-indigo-800">
-                    <i class="fas fa-trophy text-indigo-600 dark:text-indigo-400"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সার্বিক উন্নতি</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">সমন্বিত গ্রাফ</p>
-                </div>
-                <div onclick="navigateToAnalysis('recitation')" class="analysis-card bg-gradient-to-br from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/10 border border-yellow-200 dark:border-yellow-800">
-                    <i class="fas fa-quran text-yellow-600 dark:text-yellow-400"></i>
+                <div onclick="navigateToAnalysis('recitation')" class="analysis-card">
+                    <i class="fas fa-quran"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">তাসবীহ পাঠ</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">বিস্তারিত রিপোর্ট</p>
                 </div>
-                <div onclick="navigateToAnalysis('wastage')" class="analysis-card bg-gradient-to-br from-red-100 to-rose-100 dark:from-red-900/30 dark:to-rose-900/10 border border-red-200 dark:border-red-800">
-                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400"></i>
+                <div onclick="navigateToAnalysis('wastage')" class="analysis-card">
+                    <i class="fas fa-exclamation-triangle"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সময় অপচয়</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">ফোন ব্যবহার বিশ্লেষণ</p>
                 </div>
@@ -518,6 +579,14 @@
             
             <div class="space-y-4">
                 <div class="glass-folder p-4">
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">আজকের সময় ব্যয়</h4>
+                    <p class="text-3xl font-bold text-emerald-600" id="todayTasbihTime">0 ঘন্টা 0 মিনিট</p>
+                    <div id="todayTasbihBreakdown" class="mt-2 space-y-1">
+                        <!-- Breakdown per tasbih will be inserted here -->
+                    </div>
+                </div>
+                
+                <div class="glass-folder p-4">
                     <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সর্বমোট তাসবীহ সময়</h4>
                     <p class="text-3xl font-bold text-emerald-600" id="totalTasbihTime">0 ঘন্টা 0 মিনিট</p>
                 </div>
@@ -544,28 +613,6 @@
                     <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সময় ব্যয়ের গ্রাফ</h4>
                     <canvas id="timeSpentChart" height="150"></canvas>
                 </div>
-            </div>
-        </div>
-
-        <!-- OVERALL IMPROVEMENT VIEW -->
-        <div id="view-improvement" class="hidden p-5 anim-fade">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-indigo-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">সার্বিক উন্নতি</h3>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="glass-folder p-4 mb-4">
-                <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সমন্বিত উন্নতি স্কোর</h4>
-                <p class="text-3xl font-bold text-indigo-600" id="improvementScore">0</p>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                    <div id="improvementBar" class="bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
-                </div>
-            </div>
-            
-            <div class="glass-folder p-4">
-                <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সমন্বিত উন্নতি গ্রাফ</h4>
-                <canvas id="improvementChart" height="200"></canvas>
             </div>
         </div>
 
@@ -734,18 +781,15 @@
         <button onclick="resetSimple()" class="mt-10 px-6 py-2 rounded-full border border-red-200 text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 active:scale-95"><i class="fas fa-rotate-right mr-2"></i>রিসেট</button>
     </div>
 
-    <!-- BOTTOM NAV -->
+    <!-- BOTTOM NAV - UPDATED (Removed Graph/Stats) -->
     <div id="bottomNavBar" class="fixed bottom-0 w-full bg-white dark:bg-[#0f172a] dark:border-slate-800 border-t flex justify-around py-3 z-40 shadow-[0_-5px_10px_rgba(0,0,0,0.05)] transition-transform duration-300">
-        <button onclick="navigate('dashboard')" id="nav-home" class="nav-item active flex flex-col items-center w-1/4 text-emerald-600 dark:text-emerald-400">
+        <button onclick="navigate('dashboard')" id="nav-home" class="nav-item active flex flex-col items-center w-1/3 text-emerald-600 dark:text-emerald-400">
             <i class="fas fa-home text-lg"></i><span class="text-[10px] font-bold">হোম</span>
         </button>
-        <button onclick="navigate('journal')" id="nav-journal" class="nav-item flex flex-col items-center w-1/4 text-gray-400 dark:text-slate-500">
+        <button onclick="navigate('journal')" id="nav-journal" class="nav-item flex flex-col items-center w-1/3 text-gray-400 dark:text-slate-500">
             <i class="fas fa-book text-lg"></i><span class="text-[10px] font-bold">জার্নাল</span>
         </button>
-        <button onclick="navigate('stats')" id="nav-stats" class="nav-item flex flex-col items-center w-1/4 text-gray-400 dark:text-slate-500">
-            <i class="fas fa-chart-line text-lg"></i><span class="text-[10px] font-bold">গ্রাফ</span>
-        </button>
-        <button onclick="navigate('analysis')" id="nav-analysis" class="nav-item flex flex-col items-center w-1/4 text-gray-400 dark:text-slate-500">
+        <button onclick="navigate('analysis')" id="nav-analysis" class="nav-item flex flex-col items-center w-1/3 text-gray-400 dark:text-slate-500">
             <i class="fas fa-chart-pie text-lg"></i><span class="text-[10px] font-bold">বিশ্লেষণ</span>
         </button>
     </div>
@@ -870,7 +914,7 @@
     <script>
         const DB_KEY = 'akhirah_v30_complete';
         const THEME_KEY = 'akhirah_theme_pref';
-        const FIRST_OPEN_KEY = 'akhirah_first_open';
+        const PHONE_USAGE_ASKED_KEY = 'akhirah_phone_asked';
         
         const DEFAULTS_TEMPLATE = [
             { id: '1', title: 'সুবহানাল্লাহ', arabic: 'سُبْحَانَ ٱللَّٰهِ', type: 'counter', days: 'daily' },
@@ -913,16 +957,13 @@
         let currentCalendarMonth = new Date().getMonth();
         let currentCalendarYear = new Date().getFullYear();
 
-        // Crescent moons array
-        let crescentMoons = [];
-        let crescentCounter = 0;
-
         document.addEventListener('DOMContentLoaded', () => { 
-            // Check if it's first open
-            const firstOpen = localStorage.getItem(FIRST_OPEN_KEY);
+            // Check if phone usage has been asked today
+            const today = new Date().toDateString();
+            const phoneAskedDate = localStorage.getItem(PHONE_USAGE_ASKED_KEY);
             
-            if (!firstOpen) {
-                // First time opening app - show phone usage modal
+            if (phoneAskedDate !== today) {
+                // Show phone usage modal
                 document.getElementById('phoneUsageModal').classList.remove('hidden');
                 document.getElementById('mainAppContainer').classList.add('hidden');
                 
@@ -930,13 +971,12 @@
                 setTimeout(() => {
                     addMessage("আস সালামু আলাইকুম। এখানে যে নেকির হিসাব করা হয়েছে তা আরবি হরফের প্রতি অক্ষরে ১০ নেকি হিসেবে ধরে করা হয়েছে। এটা একটা কাছাকাছি ন্যূনতম ধারনা মাত্র। আল্লাহ পাক ভালো জানেন তিনি কত নেকি দিবেন। যেকোন ভূল ত্রুটি ক্ষমার দৃষ্টিতে দেখবেন।", 'info');
                 }, 1000);
-                
-                localStorage.setItem(FIRST_OPEN_KEY, 'true');
-                appData.firstOpen = true;
             } else {
-                // Not first time - check phone usage for today
+                // Phone usage already asked today, load app directly
                 loadData();
-                checkPhoneUsageForToday();
+                document.getElementById('phoneUsageModal').classList.add('hidden');
+                document.getElementById('mainAppContainer').classList.remove('hidden');
+                renderAll();
             }
             
             loadTheme();
@@ -968,6 +1008,9 @@
                 appData.phoneUsage.shift();
             }
             
+            // Mark that we have asked for phone usage today
+            localStorage.setItem(PHONE_USAGE_ASKED_KEY, today);
+            
             saveData();
             
             // Show main app
@@ -982,7 +1025,6 @@
             setInterval(() => {
                 checkDay();
                 checkSchedule();
-                checkPhoneUsageForToday();
             }, 60000); 
             
             window.addEventListener('resize', () => {
@@ -990,24 +1032,6 @@
                     resizeAndDraw();
                 }
             });
-        }
-
-        function checkPhoneUsageForToday() {
-            const today = new Date().toDateString();
-            const yesterday = new Date(Date.now() - 86400000).toDateString();
-            
-            // Check if we have phone usage for yesterday
-            const hasYesterdayUsage = appData.phoneUsage.some(usage => usage.date === yesterday);
-            
-            if (!hasYesterdayUsage) {
-                // Show phone usage modal
-                document.getElementById('phoneUsageModal').classList.remove('hidden');
-                document.getElementById('mainAppContainer').classList.add('hidden');
-                
-                // Reset inputs
-                document.getElementById('phoneHours').value = "0";
-                document.getElementById('phoneMinutes').value = "0";
-            }
         }
 
         function loadTheme() {
@@ -1295,7 +1319,7 @@
         function navigate(viewId) {
             // Hide all views
             const allViews = ['dashboard', 'tasbih-list', 'fixed-list', 'journal', 'stats', 'analysis', 
-                            'attendance', 'progress', 'history', 'targets', 'time', 'improvement', 'recitation', 'wastage'];
+                            'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
             allViews.forEach(v => {
                 const el = document.getElementById('view-'+v);
                 if(el) el.classList.add('hidden');
@@ -1305,6 +1329,7 @@
             document.getElementById('view-'+viewId).classList.remove('hidden');
             
             // Toggle Header
+            // Hide header on Stats (Live Graph) and Analysis
             if (viewId === 'stats' || viewId.startsWith('analysis') || viewId === 'analysis') {
                 document.getElementById('mainHeader').classList.add('hidden');
             } else {
@@ -1312,7 +1337,7 @@
             }
             
             // Update navigation
-            const navIds = ['home', 'journal', 'stats', 'analysis'];
+            const navIds = ['home', 'journal', 'analysis'];
             navIds.forEach(n => {
                 const el = document.getElementById('nav-'+n);
                 if(el) {
@@ -1323,8 +1348,7 @@
             
             let active = 'home';
             if(viewId === 'journal') active = 'journal';
-            else if(viewId === 'stats') active = 'stats';
-            else if(viewId.startsWith('analysis') || viewId === 'analysis') active = 'analysis';
+            else if(viewId === 'stats' || viewId.startsWith('analysis') || viewId === 'analysis') active = 'analysis';
             
             const activeEl = document.getElementById('nav-'+active);
             if(activeEl) {
@@ -1342,7 +1366,6 @@
             }
             if(viewId === 'targets') renderTargetAnalysis();
             if(viewId === 'time') renderTimeSpentAnalysis();
-            if(viewId === 'improvement') renderOverallImprovement();
             if(viewId === 'recitation') renderTasbihRecitation();
             if(viewId === 'wastage') renderWastageAnalysis();
             
@@ -1502,6 +1525,67 @@
             }
         }
 
+        // --- TOAST NOTIFICATION ---
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // Animation duration is 2.5s, remove slightly after
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // --- CONFETTI EFFECT (MODERN EXPLOSION) ---
+        function showConfetti() {
+            const container = document.getElementById('treeContainer') || document.body;
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+            
+            // Create 100 particles
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'confetti-particle';
+                
+                // Randomize starting position (edges)
+                const startSide = Math.random() > 0.5 ? 'left' : 'right';
+                particle.style[startSide] = Math.random() * 20 + '%';
+                particle.style.bottom = '0px';
+                
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(particle);
+                
+                // Animate using JS for explosion physics
+                const angle = Math.random() * Math.PI; // Random angle upward
+                const velocity = 10 + Math.random() * 20;
+                let vx = Math.cos(angle) * velocity;
+                if(startSide === 'right') vx = -Math.abs(vx); // Shoot inward
+                if(startSide === 'left') vx = Math.abs(vx); 
+                
+                let vy = -(15 + Math.random() * 15); // Shoot up
+                let x = startSide === 'left' ? 0 : window.innerWidth;
+                let y = window.innerHeight;
+                
+                const animate = () => {
+                    x += vx;
+                    y += vy;
+                    vy += 0.5; // Gravity
+                    
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    
+                    if (y < window.innerHeight) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                };
+                animate();
+            }
+        }
+
         // --- ATTENDANCE FUNCTIONS ---
         function renderCalendar() {
             const monthNames = ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
@@ -1582,7 +1666,7 @@
 
         // --- PROGRESS ANALYSIS FUNCTIONS ---
         function renderProgressCharts() {
-            // Week pie chart
+            // Week bar chart (changed from pie chart)
             const weekDays = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
             const weekData = [0, 0, 0, 0, 0, 0, 0];
             
@@ -1604,23 +1688,22 @@
             
             const weekCtx = document.getElementById('weekPieChart').getContext('2d');
             new Chart(weekCtx, {
-                type: 'doughnut',
+                type: 'bar',
                 data: {
                     labels: weekDays,
                     datasets: [{
+                        label: 'নেকি',
                         data: weekData,
-                        backgroundColor: [
-                            '#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', 
-                            '#ef4444', '#ec4899', '#06b6d4'
-                        ],
+                        backgroundColor: '#10b981',
+                        borderColor: '#059669',
                         borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
                 }
@@ -1634,7 +1717,7 @@
                 monthData[month] += h.neki || 0;
             });
             
-            const monthLabels = monthNames.map(m => m.substring(0, 3));
+            const monthLabels = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
             const monthCtx = document.getElementById('monthLineChart').getContext('2d');
             new Chart(monthCtx, {
                 type: 'line',
@@ -1846,6 +1929,43 @@
             
             document.getElementById('totalTasbihTime').textContent = `${hours} ঘন্টা ${minutes} মিনিট`;
             
+            // Calculate today's time spent
+            const today = new Date().toDateString();
+            let todaySeconds = 0;
+            Object.values(appData.timeSpent).forEach(tasbihData => {
+                if (tasbihData[today]) {
+                    todaySeconds += tasbihData[today];
+                }
+            });
+            
+            const todayHours = Math.floor(todaySeconds / 3600);
+            const todayMinutes = Math.floor((todaySeconds % 3600) / 60);
+            
+            document.getElementById('todayTasbihTime').textContent = `${todayHours} ঘন্টা ${todayMinutes} মিনিট`;
+            
+            // Breakdown per tasbih for today
+            const breakdownContainer = document.getElementById('todayTasbihBreakdown');
+            breakdownContainer.innerHTML = '';
+            
+            const tasbihItems = appData.items.filter(item => item.type === 'counter');
+            tasbihItems.forEach(item => {
+                const tasbihSeconds = appData.timeSpent[item.id] ? appData.timeSpent[item.id][today] : 0;
+                if (tasbihSeconds > 0) {
+                    const tasbihMinutes = Math.round(tasbihSeconds / 60);
+                    const el = document.createElement('div');
+                    el.className = 'flex justify-between';
+                    el.innerHTML = `
+                        <span class="text-sm text-gray-600 dark:text-gray-400">${item.title}</span>
+                        <span class="text-sm font-bold text-emerald-600">${tasbihMinutes} মিনিট</span>
+                    `;
+                    breakdownContainer.appendChild(el);
+                }
+            });
+            
+            if (breakdownContainer.innerHTML === '') {
+                breakdownContainer.innerHTML = '<p class="text-sm text-gray-400 text-center">কোনো সময় ব্যয় করা হয়নি</p>';
+            }
+            
             // Calculate averages
             const attendanceDays = appData.attendance.length || 1;
             const avgDailyMinutes = Math.round((totalSeconds / 60) / attendanceDays);
@@ -1888,77 +2008,6 @@
                         borderColor: '#059669',
                         borderWidth: 1
                     }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- OVERALL IMPROVEMENT FUNCTIONS ---
-        function renderOverallImprovement() {
-            // Calculate improvement score (0-100)
-            let score = 0;
-            
-            // Attendance contributes 30%
-            const attendanceRate = appData.attendance.length > 0 ? 
-                Math.min(100, (appData.attendance.length / 30) * 100) : 0;
-            score += attendanceRate * 0.3;
-            
-            // Neki growth contributes 40%
-            const avgDailyNeki = appData.history.length > 0 ? 
-                appData.history.reduce((sum, h) => sum + (h.neki || 0), 0) / appData.history.length : 0;
-            const nekiScore = Math.min(100, avgDailyNeki / 100);
-            score += nekiScore * 0.4;
-            
-            // Journal consistency contributes 30%
-            const journalDays = [...new Set(appData.journal.map(j => j.date))].length;
-            const journalScore = Math.min(100, (journalDays / 30) * 100);
-            score += journalScore * 0.3;
-            
-            score = Math.round(score);
-            
-            document.getElementById('improvementScore').textContent = score;
-            document.getElementById('improvementBar').style.width = `${score}%`;
-            
-            // Create improvement chart
-            const dates = appData.history.slice(-7).map(h => {
-                const d = new Date(h.date);
-                return `${d.getDate()}/${d.getMonth() + 1}`;
-            });
-            
-            const nekiData = appData.history.slice(-7).map(h => h.neki || 0);
-            const xpData = appData.history.slice(-7).map(h => h.xp || 0);
-            
-            const improvementCtx = document.getElementById('improvementChart').getContext('2d');
-            if (window.improvementChart) window.improvementChart.destroy();
-            window.improvementChart = new Chart(improvementCtx, {
-                type: 'line',
-                data: {
-                    labels: dates,
-                    datasets: [
-                        {
-                            label: 'নেকি',
-                            data: nekiData,
-                            borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'XP',
-                            data: xpData,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }
-                    ]
                 },
                 options: {
                     responsive: true,
@@ -2197,6 +2246,7 @@
                 if(Array.isArray(d.days)) {
                     const dayNames = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
                     dayText = d.days.map(i => dayNames[i]).join(', ');
+
                 }
 
                 el.innerHTML = `
@@ -2426,7 +2476,7 @@
                 ctx.moveTo(0,0); 
                 ctx.quadraticCurveTo(5, -10, 10, -15); 
                 ctx.quadraticCurveTo(0, -15, -5, -5); 
-                ctx.fillStyle = isDarkMode ? "#34d399" : "#10b981"; 
+                ctx.fillStyle = isDarkMode ? "#166534" : "#10b981"; // Darker green for dark mode
                 ctx.fill(); 
                 ctx.restore(); 
                 return;
@@ -2434,16 +2484,11 @@
             
             const maxGrowth = 500; 
             const growth = Math.max(0.15, Math.min(count, maxGrowth) / maxGrowth); 
-            const baseLen = (logicalHeight * 0.28) * growth; 
+            const baseLen = (logicalHeight * 0.22) * growth; // Smaller trunk
             ctx.save(); 
             ctx.translate(startX, startY); 
             branch(baseLen, 0, count); 
             ctx.restore();
-            
-            // Draw crescent moons if count >= 1000
-            if (count >= 1000) {
-                drawCrescentMoons(count);
-            }
         }
         
         function branch(len, angle, count) {
@@ -2466,9 +2511,10 @@
                 let density = 6; 
                 let spreadRadius = 18;
                 if (count > 500) { 
-                    let bushFactor = (count - 500) / 10; 
-                    density += Math.min(30, bushFactor); 
-                    spreadRadius += Math.min(45, bushFactor); 
+                    // Increase fruit density rapidly
+                    let bushFactor = (count - 500) / 5; // Faster density increase
+                    density += Math.min(60, bushFactor); 
+                    spreadRadius += Math.min(70, bushFactor); 
                 }
                 
                 for(let i=0; i<density; i++) {
@@ -2476,14 +2522,23 @@
                     let rX = (Math.random() - 0.5) * spreadRadius; 
                     let rY = (Math.random() - 0.5) * spreadRadius;
                     ctx.ellipse(rX, rY, 5, 2, Math.random() * Math.PI, 0, 2 * Math.PI);
-                    let green = 150 + Math.random() * 60;
-                    if(isDarkMode) { 
-                        ctx.fillStyle = `rgba(52, 211, 153, 0.9)`; 
-                        ctx.shadowBlur = 5; 
-                        ctx.shadowColor = "rgba(52, 211, 153, 0.5)"; 
-                    } else { 
-                        ctx.fillStyle = `rgba(20, ${green}, 80, 0.85)`; 
-                        ctx.shadowBlur = 0; 
+                    
+                    // Leaf Color Logic
+                    if (count > 2000) {
+                        // Multicolor leaves
+                        ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                        ctx.shadowBlur = 0;
+                    } else {
+                        // Standard Green
+                        let green = 150 + Math.random() * 60;
+                        if(isDarkMode) { 
+                            ctx.fillStyle = `rgba(16, 185, 129, 0.9)`; 
+                            ctx.shadowBlur = 5; 
+                            ctx.shadowColor = "rgba(16, 185, 129, 0.5)"; 
+                        } else { 
+                            ctx.fillStyle = `rgba(20, ${green}, 80, 0.85)`; 
+                            ctx.shadowBlur = 0; 
+                        }
                     }
                     ctx.fill(); 
                     ctx.shadowBlur = 0; 
@@ -2491,18 +2546,35 @@
                 
                 // Draw fruits when count > 500
                 if (count > 500) {
-                    let intensity = Math.min(1, (count - 500) / 1000); 
+                    let intensity = Math.min(1.5, (count - 500) / 400); // More fruits faster
                     let pseudoRandom = Math.abs(Math.sin(len * 99 + angle));
                     if (pseudoRandom < intensity * 1.5) { 
                         let clusterSize = 1; 
                         if(intensity > 0.3) clusterSize = 2; 
                         if(intensity > 0.6) clusterSize = 3;
+                        if(intensity > 0.9) clusterSize = 4;
+                        
                         for(let f=0; f<clusterSize; f++) {
                             ctx.beginPath(); 
                             let fx = (f * 5) - 3; 
                             let fy = (f * 3); 
                             ctx.arc(fx, fy, 4.5, 0, Math.PI*2); 
-                            ctx.fillStyle = isDarkMode ? "#f87171" : "#ef4444"; 
+                            
+                            // Fruit Color Logic
+                            if (count > 1500) {
+                                // Gold + Red + Yellow
+                                let r = Math.random();
+                                if(r > 0.7) ctx.fillStyle = "#FFD700"; // Gold
+                                else if(r > 0.4) ctx.fillStyle = "#FFFF00"; // Yellow
+                                else ctx.fillStyle = "#FF0000"; // Red
+                            } else if (count > 1000) {
+                                // Yellow + Red
+                                ctx.fillStyle = Math.random() > 0.5 ? "#FFFF00" : "#FF0000";
+                            } else {
+                                // Just Red (or dark mode red)
+                                ctx.fillStyle = isDarkMode ? "#f87171" : "#ef4444"; 
+                            }
+                            
                             ctx.fill();
                             ctx.beginPath(); 
                             ctx.arc(fx-1.5, fy-1.5, 1.5, 0, Math.PI*2); 
@@ -2513,39 +2585,6 @@
                 }
             }
             ctx.restore();
-        }
-        
-        function drawCrescentMoons(count) {
-            // Clear existing crescents
-            crescentMoons = [];
-            
-            // Calculate how many crescents to show (5 per 100 counts after 1000)
-            const extraCount = Math.max(0, count - 1000);
-            const crescentCount = 5 + Math.floor(extraCount / 100) * 5;
-            
-            const container = document.getElementById('treeContainer');
-            const rect = container.getBoundingClientRect();
-            
-            // Create crescent moon elements
-            for (let i = 0; i < crescentCount; i++) {
-                const crescent = document.createElement('div');
-                crescent.className = 'crescent';
-                
-                // Random position in tree container
-                const left = Math.random() * rect.width;
-                const top = Math.random() * rect.height * 0.7; // Mostly in upper part
-                
-                // Random size between 20-40px
-                const size = 20 + Math.random() * 20;
-                
-                crescent.style.width = `${size}px`;
-                crescent.style.height = `${size}px`;
-                crescent.style.left = `${left}px`;
-                crescent.style.top = `${top}px`;
-                
-                container.appendChild(crescent);
-                crescentMoons.push(crescent);
-            }
         }
         
         function openFocusMode(id) {
@@ -2581,10 +2620,6 @@
         }
         
         function closeFocusMode() { 
-            // Clear crescent moons
-            crescentMoons.forEach(moon => moon.remove());
-            crescentMoons = [];
-            
             pauseTimer();
             document.getElementById('view-focus').classList.add('hidden'); 
             document.getElementById('bottomNavBar').style.transform = "translateY(0)"; 
@@ -2603,20 +2638,13 @@
             
             saveData();
             
-            // Long vibration for every 100 counts
+            // Show toast and confetti for every 100 counts
             if (appData.dailyCounts[task.id] % 100 === 0) {
                 if (navigator.vibrate) {
-                    navigator.vibrate([100, 50, 100, 50, 200]); // Long vibration pattern
+                    navigator.vibrate([100, 50, 100, 50, 200]);
                 }
-                showCelebration();
-            }
-            
-            // Show crescent moons for every 1000 counts
-            if (appData.dailyCounts[task.id] >= 1000) {
-                if (crescentCounter % 20 === 0) { // Every 20 taps after 1000
-                    drawCrescentMoons(appData.dailyCounts[task.id]);
-                }
-                crescentCounter++;
+                showToast("মাশাআল্লাহ! ১০০ বার পূর্ণ হয়েছে!");
+                showConfetti();
             }
             
             let x, y; 
@@ -2651,24 +2679,6 @@
             el.style.transform = `translate(${tx - sx}px, ${ty - sy}px) scale(0.5)`; 
             el.style.opacity = '0';
             setTimeout(() => el.remove(), 600);
-        }
-        
-        function showCelebration() {
-            const el = document.createElement('div'); 
-            el.className = 'celebration-text'; 
-            el.innerText = "মাশাআল্লাহ!";
-            el.style.position = 'fixed';
-            el.style.top = '50%';
-            el.style.left = '50%';
-            el.style.transform = 'translate(-50%, -50%)';
-            el.style.zIndex = '1000';
-            el.style.color = '#10b981';
-            el.style.fontSize = '48px';
-            el.style.fontWeight = 'bold';
-            el.style.textShadow = '0 0 20px rgba(16, 185, 129, 0.5)';
-            el.style.animation = 'fadeIn 0.5s, fadeOut 0.5s 1.5s';
-            document.body.appendChild(el); 
-            setTimeout(() => el.remove(), 2000);
         }
         
         function toggleFixed(id, r, btn) {
@@ -2782,3 +2792,4 @@
     </script>
 </body>
 </html>
+```
