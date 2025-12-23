@@ -12,6 +12,19 @@
     
     <!-- PWA Manifest (Embedded) -->
     <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAiQWtoaXJhaCBBc3NldHMiLAogICAgInNob3J0X25hbWUiOiAiQWtoaXJhaCIsCiAgICAic3RhcnRfdXJsIjogIi4iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWNmZGY1IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMTBiOTgxIiwKICAgICJpY29ucyI6IFsKICAgICAgewogICAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnS1wbmcuZmxhdGljb24uY29tLzUxMi8yOTA3LzI5MDcyNTMucG5nIiwKICAgICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICB9CiAgICBdCn0=">
+    
+    <!-- Register Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            });
+        }
+    </script>
 
     <title>Akhirah Assets - বিশ্লেষণ সহ</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -205,6 +218,44 @@
         .calendar-day.absent { background-color: #ef4444; color: white; }
         .calendar-day.future { background-color: #f1f5f9; color: #64748b; }
         .calendar-day.today { border: 2px solid #3b82f6; }
+        
+        /* Level Progress Bar */
+        .level-progress-bar {
+            height: 4px;
+            background-color: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #10b981, #34d399);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        .level-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        .level-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col relative">
@@ -273,8 +324,14 @@
                     <button onclick="toggleTheme()" class="bg-white/20 backdrop-blur w-9 h-9 rounded-full border border-white/30 flex items-center justify-center active:scale-95 hover:bg-white/30 transition">
                         <i id="themeIcon" class="fas fa-moon text-white text-xs"></i>
                     </button>
-                    <div class="bg-white/20 backdrop-blur px-3 py-1 rounded-full border border-white/30">
-                        <span class="text-xs font-bold ml-1" id="levelDisplay">Level 1</span>
+                    <div id="levelBadgeContainer" class="flex flex-col items-center">
+                        <div class="level-badge px-3 py-1 flex items-center gap-2">
+                            <i class="fas fa-trophy text-xs"></i>
+                            <span class="text-xs font-bold ml-1" id="levelDisplay">Level 1</span>
+                        </div>
+                        <div class="level-progress-bar w-20 mt-1">
+                            <div id="levelProgressFill" class="level-progress-fill" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -382,16 +439,22 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <div onclick="navigateToAnalysis('attendance')" class="analysis-card">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">উপস্থিতি</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">মাসিক ক্যালেন্ডার</p>
+                <!-- আজকের আমল কার্ড - প্রথমে যোগ করা হয়েছে -->
+                <div onclick="navigateToAnalysis('today-details')" class="analysis-card">
+                    <i class="fas fa-calendar-day"></i>
+                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">আজকের আমল</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">বিস্তারিত রিপোর্ট</p>
                 </div>
                 <!-- LIVE GRAPH Added Here -->
                 <div onclick="navigateToAnalysis('stats')" class="analysis-card">
                     <i class="fas fa-chart-area"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">লাইভ গ্রাফ</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">পরিসংখ্যান দেখুন</p>
+                </div>
+                <div onclick="navigateToAnalysis('attendance')" class="analysis-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">উপস্থিতি</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">মাসিক ক্যালেন্ডার</p>
                 </div>
                 <div onclick="navigateToAnalysis('progress')" class="analysis-card">
                     <i class="fas fa-chart-line"></i>
@@ -422,6 +485,59 @@
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সময় অপচয়</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">ফোন ব্যবহার বিশ্লেষণ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- আজকের আমল বিশদ VIEW -->
+        <div id="view-today-details" class="hidden p-5 anim-fade">
+            <div class="flex justify-between items-center mb-4">
+                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-emerald-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">আজকের আমল</h3>
+                <div class="w-8"></div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="glass-folder p-4">
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">আজকের তাসবীহ সমূহ</h4>
+                    <div id="todayTasbihDetails" class="space-y-3"></div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">মোট তাসবীহ:</span>
+                            <span class="text-sm font-bold text-emerald-600" id="todayTotalTasbih">0 বার</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">মোট নেকি:</span>
+                            <span class="text-sm font-bold text-emerald-600" id="todayTotalTasbihNeki">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-folder p-4">
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">টার্গেট আমল</h4>
+                    <div id="todayTargetDetails" class="space-y-3"></div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">পূরন:</span>
+                            <span class="text-sm font-bold text-emerald-600" id="todayCompletedTargets">0/0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">বাকি:</span>
+                            <span class="text-sm font-bold text-red-600" id="todayPendingTargets">0/0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">টার্গেট নেকি:</span>
+                            <span class="text-sm font-bold text-emerald-600" id="todayTargetNeki">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-folder p-4">
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">আজকের সারাংশ</h4>
+                    <div class="text-center">
+                        <p class="text-2xl font-bold text-emerald-600" id="todayTotalNekiSummary">0</p>
+                        <p class="text-sm text-gray-500">আজকের মোট অর্জিত নেকি</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -915,6 +1031,7 @@
         const DB_KEY = 'akhirah_v30_complete';
         const THEME_KEY = 'akhirah_theme_pref';
         const PHONE_USAGE_ASKED_KEY = 'akhirah_phone_asked';
+        const DAILY_REPORT_SHOWN_KEY = 'akhirah_daily_report_shown';
         
         const DEFAULTS_TEMPLATE = [
             { id: '1', title: 'সুবহানাল্লাহ', arabic: 'سُبْحَانَ ٱللَّٰهِ', type: 'counter', days: 'daily' },
@@ -935,7 +1052,7 @@
             // New fields for analysis
             attendance: [], // Array of dates when user performed any action
             timeSpent: {}, // Object to store time spent in tasbih: {tasbihId: {date: seconds}}
-            targetCompletion: {}, // Store target completion history
+            targetCompletion: {}, // Store target completion history with dates
             focusTimer: {totalSeconds: 0, startTime: null, isRunning: false, currentTasbihId: null},
             phoneUsage: [], // Array of {date: string, hours: number, minutes: number}
             firstOpen: false
@@ -1130,6 +1247,9 @@
                 appData.sentRemindersDate = today;
                 appData.sentRemindersFlags = [false, false, false];
                 
+                // Reset daily report shown flag
+                localStorage.removeItem(DAILY_REPORT_SHOWN_KEY);
+                
                 saveData(); 
                 renderAll();
             } else {
@@ -1184,9 +1304,10 @@
         // Generate daily report only once per day when app opens
         function generateDailyReportIfNeeded() {
             const today = new Date().toDateString();
+            const dailyReportShown = localStorage.getItem(DAILY_REPORT_SHOWN_KEY);
             
             // Only generate if not already generated today
-            if (appData.lastReportDate !== today) {
+            if (appData.lastReportDate !== today && dailyReportShown !== today) {
                 // Retrieve history for the last day (yesterday)
                 let yesterdayStats = { neki: 0, date: 'Yesterday' };
                 if(appData.history.length > 0) {
@@ -1208,6 +1329,7 @@
                 sendSystemNotification("আপনার গতদিনের আমলের রিপোর্ট এসেছে।");
                 
                 appData.lastReportDate = today;
+                localStorage.setItem(DAILY_REPORT_SHOWN_KEY, today);
                 saveData();
             }
         }
@@ -1319,18 +1441,19 @@
         function navigate(viewId) {
             // Hide all views
             const allViews = ['dashboard', 'tasbih-list', 'fixed-list', 'journal', 'stats', 'analysis', 
-                            'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
+                            'today-details', 'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
             allViews.forEach(v => {
                 const el = document.getElementById('view-'+v);
                 if(el) el.classList.add('hidden');
             });
             
             // Show requested view
-            document.getElementById('view-'+viewId).classList.remove('hidden');
+            const viewEl = document.getElementById('view-'+viewId);
+            if (viewEl) viewEl.classList.remove('hidden');
             
-            // Toggle Header
-            // Hide header on Stats (Live Graph) and Analysis
-            if (viewId === 'stats' || viewId.startsWith('analysis') || viewId === 'analysis') {
+            // Toggle Header - Hide header on analysis subpages and stats
+            const analysisSubpages = ['stats', 'today-details', 'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
+            if (analysisSubpages.includes(viewId)) {
                 document.getElementById('mainHeader').classList.add('hidden');
             } else {
                 document.getElementById('mainHeader').classList.remove('hidden');
@@ -1358,6 +1481,7 @@
 
             // Load specific data for views
             if(viewId === 'stats') loadCharts();
+            if(viewId === 'today-details') renderTodayDetails();
             if(viewId === 'attendance') renderCalendar();
             if(viewId === 'progress') renderProgressCharts();
             if(viewId === 'history') { 
@@ -1379,10 +1503,49 @@
             navigate(viewId);
         }
 
+        // Updated function to handle level badge and progress
         function updateUI() {
             document.getElementById('totalNeki').innerText = appData.totalNeki.toLocaleString();
             document.getElementById('totalXp').innerText = appData.totalXp.toLocaleString();
-            document.getElementById('levelDisplay').innerText = `Level ${1 + Math.floor(appData.totalNeki / 10000)}`;
+            
+            // Calculate level and progress
+            const currentLevel = 1 + Math.floor(appData.totalNeki / 10000);
+            const nextLevelNeki = currentLevel * 10000;
+            const currentLevelStartNeki = (currentLevel - 1) * 10000;
+            const progressPercentage = ((appData.totalNeki - currentLevelStartNeki) / 10000) * 100;
+            
+            document.getElementById('levelDisplay').innerText = `Level ${currentLevel}`;
+            
+            // Update level badge with dynamic gradient
+            const levelBadge = document.querySelector('.level-badge');
+            const levelColors = [
+                {bg: 'linear-gradient(135deg, #10b981, #059669)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #ec4899, #be185d)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #f59e0b, #d97706)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #ef4444, #dc2626)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #06b6d4, #0891b2)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #84cc16, #65a30d)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #f97316, #ea580c)', text: 'white'},
+                {bg: 'linear-gradient(135deg, #6366f1, #4f46e5)', text: 'white'}
+            ];
+            
+            const colorIndex = (currentLevel - 1) % levelColors.length;
+            levelBadge.style.background = levelColors[colorIndex].bg;
+            levelBadge.style.color = levelColors[colorIndex].text;
+            
+            // Add trophy emoji every 10 levels
+            const trophyEmoji = currentLevel >= 10 ? '🏆 ' : '';
+            levelBadge.innerHTML = `<i class="fas fa-trophy text-xs"></i> <span class="text-xs font-bold ml-1">${trophyEmoji}Level ${currentLevel}</span>`;
+            
+            // Update progress bar
+            const progressBar = document.getElementById('levelProgressFill');
+            progressBar.style.width = `${Math.min(100, progressPercentage)}%`;
+            
+            // Update next level tooltip
+            const remainingNeki = nextLevelNeki - appData.totalNeki;
+            progressBar.title = `পরবর্তী লেভেলে যেতে বাকি: ${remainingNeki.toLocaleString()} নেকি`;
             
             const tNekiEl = document.getElementById('todayNeki');
             tNekiEl.innerText = appData.todayNeki.toLocaleString();
@@ -1459,6 +1622,109 @@
                     fList.appendChild(el);
                 }
             });
+        }
+
+        // --- আজকের আমল বিশদ VIEW ফাংশন ---
+        function renderTodayDetails() {
+            const tasbihContainer = document.getElementById('todayTasbihDetails');
+            const targetContainer = document.getElementById('todayTargetDetails');
+            tasbihContainer.innerHTML = '';
+            targetContainer.innerHTML = '';
+            
+            let todayTotalTasbih = 0;
+            let todayTotalTasbihNeki = 0;
+            let todayCompletedTargets = 0;
+            let todayTotalTargets = 0;
+            let todayTargetNeki = 0;
+            
+            // Today's tasbih details
+            const tasbihItems = appData.items.filter(item => item.type === 'counter');
+            tasbihItems.forEach(item => {
+                const count = appData.dailyCounts[item.id] || 0;
+                if (count > 0) {
+                    const reward = count * 10; // Assuming 10 neki per tasbih
+                    todayTotalTasbih += count;
+                    todayTotalTasbihNeki += reward;
+                    
+                    const el = document.createElement('div');
+                    el.className = 'flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-800 rounded-lg';
+                    el.innerHTML = `
+                        <div>
+                            <p class="text-sm font-bold text-gray-700 dark:text-gray-300">${item.title}</p>
+                            <p class="text-xs text-gray-500">${count} বার পাঠ</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold text-emerald-600">+${reward}</p>
+                            <p class="text-xs text-gray-500">নেকি</p>
+                        </div>
+                    `;
+                    tasbihContainer.appendChild(el);
+                }
+            });
+            
+            if (todayTotalTasbih === 0) {
+                tasbihContainer.innerHTML = '<p class="text-sm text-gray-400 text-center p-4">আজ কোনো তাসবীহ পড়া হয়নি</p>';
+            }
+            
+            // Today's target details
+            const fixedItems = appData.items.filter(item => item.type === 'fixed');
+            fixedItems.forEach(item => {
+                todayTotalTargets++;
+                const isDone = appData.dailyCounts[item.id];
+                if (isDone) {
+                    todayCompletedTargets++;
+                    const reward = getReward(item);
+                    todayTargetNeki += reward;
+                    
+                    const el = document.createElement('div');
+                    el.className = 'flex justify-between items-center p-2 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800';
+                    el.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
+                            <div>
+                                <p class="text-sm font-bold text-green-700 dark:text-green-400">${item.title}</p>
+                                <p class="text-xs text-gray-500">সম্পূর্ণ</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold text-emerald-600">+${reward}</p>
+                            <p class="text-xs text-gray-500">নেকি</p>
+                        </div>
+                    `;
+                    targetContainer.appendChild(el);
+                } else {
+                    const el = document.createElement('div');
+                    el.className = 'flex justify-between items-center p-2 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800';
+                    el.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-times-circle text-red-500 text-sm"></i>
+                            <div>
+                                <p class="text-sm font-bold text-red-700 dark:text-red-400">${item.title}</p>
+                                <p class="text-xs text-gray-500">বাকি</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold text-gray-400">-</p>
+                            <p class="text-xs text-gray-500">নেকি</p>
+                        </div>
+                    `;
+                    targetContainer.appendChild(el);
+                }
+            });
+            
+            if (todayTotalTargets === 0) {
+                targetContainer.innerHTML = '<p class="text-sm text-gray-400 text-center p-4">কোনো টার্গেট আমল নেই</p>';
+            }
+            
+            // Update summary
+            document.getElementById('todayTotalTasbih').textContent = `${todayTotalTasbih} বার`;
+            document.getElementById('todayTotalTasbihNeki').textContent = todayTotalTasbihNeki.toLocaleString();
+            document.getElementById('todayCompletedTargets').textContent = `${todayCompletedTargets}/${todayTotalTargets}`;
+            document.getElementById('todayPendingTargets').textContent = `${todayTotalTargets - todayCompletedTargets}/${todayTotalTargets}`;
+            document.getElementById('todayTargetNeki').textContent = todayTargetNeki.toLocaleString();
+            
+            const todayTotalNeki = todayTotalTasbihNeki + todayTargetNeki;
+            document.getElementById('todayTotalNekiSummary').textContent = todayTotalNeki.toLocaleString();
         }
 
         // --- TIMER FUNCTIONS ---
@@ -1848,9 +2114,10 @@
             `;
         }
 
-        // --- TARGET ANALYSIS FUNCTIONS ---
+        // --- TARGET ANALYSIS FUNCTIONS (Updated with dates) ---
         function renderTargetAnalysis() {
             const fixedItems = appData.items.filter(item => item.type === 'fixed');
+            const today = new Date().toDateString();
             
             // Calculate completed targets
             let totalCompleted = 0;
@@ -1861,14 +2128,25 @@
                 const isDone = appData.dailyCounts[item.id];
                 if (isDone) {
                     totalCompleted++;
+                    // Add completion date if not exists
+                    if (!appData.targetCompletion[item.id]) {
+                        appData.targetCompletion[item.id] = [];
+                    }
+                    if (!appData.targetCompletion[item.id].includes(today)) {
+                        appData.targetCompletion[item.id].push(today);
+                    }
                     completedTargets.push({
                         title: item.title,
-                        reward: getReward(item)
+                        reward: getReward(item),
+                        lastCompleted: appData.targetCompletion[item.id] ? 
+                            appData.targetCompletion[item.id][appData.targetCompletion[item.id].length - 1] : today
                     });
                 } else {
                     missedTargets.push({
                         title: item.title,
-                        reward: getReward(item)
+                        reward: getReward(item),
+                        missedSince: appData.targetCompletion[item.id] ? 
+                            appData.targetCompletion[item.id][appData.targetCompletion[item.id].length - 1] : 'কখনো না'
                     });
                 }
             });
@@ -1879,7 +2157,7 @@
             document.getElementById('monthTargets').textContent = `${totalCompleted}/${totalTargets}`;
             document.getElementById('totalTargets').textContent = `${totalCompleted}/${totalTargets}`;
             
-            // Render missed targets list
+            // Render missed targets list with dates
             const missedList = document.getElementById('missedTargetsList');
             missedList.innerHTML = '';
             if (missedTargets.length === 0) {
@@ -1890,13 +2168,16 @@
                     el.className = 'p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800';
                     el.innerHTML = `
                         <p class="text-sm font-bold text-red-700 dark:text-red-400">${target.title}</p>
-                        <p class="text-xs text-gray-500 mt-1">${target.reward} নেকি মিস করেছেন</p>
+                        <div class="flex justify-between items-center mt-1">
+                            <p class="text-xs text-gray-500">${target.reward} নেকি মিস</p>
+                            <p class="text-xs text-red-600">শেষবার: ${target.missedSince}</p>
+                        </div>
                     `;
                     missedList.appendChild(el);
                 });
             }
             
-            // Render completed targets list
+            // Render completed targets list with dates
             const completedList = document.getElementById('completedTargetsList');
             completedList.innerHTML = '';
             if (completedTargets.length === 0) {
@@ -1907,7 +2188,10 @@
                     el.className = 'p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800';
                     el.innerHTML = `
                         <p class="text-sm font-bold text-green-700 dark:text-green-400">${target.title}</p>
-                        <p class="text-xs text-gray-500 mt-1">${target.reward} নেকি পেয়েছেন</p>
+                        <div class="flex justify-between items-center mt-1">
+                            <p class="text-xs text-gray-500">${target.reward} নেকি অর্জিত</p>
+                            <p class="text-xs text-green-600">শেষবার: ${target.lastCompleted}</p>
+                        </div>
                     `;
                     completedList.appendChild(el);
                 });
@@ -2791,5 +3075,4 @@
         }
     </script>
 </body>
-</html>
-```
+    </html>
