@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn" class="light">
 <head>
@@ -11,22 +12,9 @@
     <meta name="apple-mobile-web-app-title" content="Akhirah Assets">
     
     <!-- PWA Manifest (Embedded) -->
-    <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAiQWtoaXJhaCBBc3NldHMiLAogICAgInNob3J0X25hbWUiOiAiQWtoaXJhaCIsCiAgICAic3RhcnRfdXJsIjogIi4iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWNmZGY1IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMTBiOTgxIiwKICAgICJpY29ucyI6IFsKICAgICAgewogICAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnS1wbmcuZmxhdGljb24uY29tLzUxMi8yOTA3LzI5MDcyNTMucG5nIiwKICAgICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICB9CiAgICBdCn0=">
-    
-    <!-- Register Service Worker -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }).catch(function(error) {
-                    console.log('Service Worker registration failed:', error);
-                });
-            });
-        }
-    </script>
+    <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAiQWtoaXJhaCBBc3NldHMiLAogICAgInNob3J0X25hbWUiOiAiQWtoaXJhaCIsCiAgICAic3RhcnRfdXJsIjogIi4iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWNmZGY1IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMTBiOTgxIiwKICAgICJpY29ucyI6IFsKICAgICAgewogICAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS81MTIvMjkwNy8yOTA3MjUzLnBuZyIsCiAgICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgfQogICAgXQp9=">
 
-    <title>Akhirah Assets - বিশ্লেষণ সহ</title>
+    <title>Akhirah Assets - সহজ বিশ্লেষণ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -69,8 +57,8 @@
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 15px rgba(31, 38, 135, 0.05);
-            border-radius: 20px; 
-            transition: transform 0.1s; 
+            border-radius: 16px; 
+            transition: transform 0.2s; 
         }
 
         html.dark .glass-folder {
@@ -134,7 +122,7 @@
             background-color: rgba(239, 68, 68, 0.05);
         }
 
-        /* Toast Notification - Updated (Bottom Large) */
+        /* Toast Notification - Simplified */
         @keyframes toastSlideUp {
             0% { transform: translate(-50%, 100%); opacity: 0; }
             10% { transform: translate(-50%, 0); opacity: 1; }
@@ -144,7 +132,7 @@
         
         .toast {
             position: fixed;
-            bottom: 100px; /* উপরে উঠে আসবে */
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
@@ -153,13 +141,13 @@
             border-radius: 50px;
             z-index: 1000;
             font-weight: bold;
-            font-size: 1.25rem; /* বড় ফন্ট */
+            font-size: 1.25rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             animation: toastSlideUp 2.5s ease-in-out forwards;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(16, 185, 129, 0.5);
             text-align: center;
-            min-width: 250px;
+            min-width: 200px;
         }
 
         /* Modern Confetti Explosion */
@@ -172,24 +160,23 @@
             border-radius: 50%;
         }
 
-        /* Analysis Grid */
+        /* Analysis Cards - Simplified */
         .analysis-card {
-            height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;
             border-radius: 16px; transition: all 0.3s; cursor: pointer;
-            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 15px rgba(31, 38, 135, 0.05);
         }
         html.dark .analysis-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
-        .analysis-card:hover { transform: translateY(-5px); }
+        .analysis-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .analysis-card i { 
-            font-size: 28px; 
-            margin-bottom: 10px; 
+            font-size: 32px; 
+            margin-bottom: 12px; 
             color: #10b981; 
         }
         html.dark .analysis-card i { 
@@ -197,64 +184,98 @@
         }
         .analysis-card h3 {
             font-weight: bold;
+            font-size: 16px;
             color: #333;
+            margin-bottom: 4px;
         }
         html.dark .analysis-card h3 {
             color: #e2e8f0;
         }
         .analysis-card p {
             color: #666;
+            font-size: 12px;
+            text-align: center;
+            padding: 0 8px;
         }
         html.dark .analysis-card p {
             color: #94a3b8;
         }
 
-        /* Calendar Styles */
-        .calendar-day {
-            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; font-size: 12px; cursor: pointer;
-        }
-        .calendar-day.present { background-color: #10b981; color: white; }
-        .calendar-day.absent { background-color: #ef4444; color: white; }
-        .calendar-day.future { background-color: #f1f5f9; color: #64748b; }
-        .calendar-day.today { border: 2px solid #3b82f6; }
-        
-        /* Level Progress Bar */
-        .level-progress-bar {
-            height: 4px;
+        /* Progress Bars */
+        .progress-bar {
+            height: 6px;
             background-color: #e5e7eb;
-            border-radius: 2px;
-            margin-top: 4px;
+            border-radius: 3px;
             overflow: hidden;
         }
-        .level-progress-fill {
+        
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, #10b981, #34d399);
-            border-radius: 2px;
-            transition: width 0.5s ease;
+            background-color: #10b981;
+            border-radius: 3px;
+            transition: width 0.3s ease;
         }
-        .level-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
+
+        /* Filter Pills */
+        .filter-pill {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .filter-pill.active {
+            background-color: #10b981;
             color: white;
-            padding: 3px 8px;
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: bold;
+            border-color: #10b981;
+        }
+        
+        html.dark .filter-pill {
+            border-color: #334155;
+            background-color: #1e293b;
+            color: #cbd5e1;
+        }
+        
+        html.dark .filter-pill.active {
+            background-color: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* Insight Cards */
+        .insight-card {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #10b981;
+        }
+        
+        html.dark .insight-card {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.2), rgba(16, 185, 129, 0.1));
+            border-left: 4px solid #10b981;
+        }
+        
+        /* Calendar Styling */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
             display: flex;
             align-items: center;
-            gap: 4px;
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
         }
-        .level-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            z-index: 1;
+        .cal-header {
+            text-align: center;
+            font-size: 10px;
+            color: #9ca3af;
+            padding-bottom: 4px;
         }
     </style>
 </head>
@@ -324,14 +345,8 @@
                     <button onclick="toggleTheme()" class="bg-white/20 backdrop-blur w-9 h-9 rounded-full border border-white/30 flex items-center justify-center active:scale-95 hover:bg-white/30 transition">
                         <i id="themeIcon" class="fas fa-moon text-white text-xs"></i>
                     </button>
-                    <div id="levelBadgeContainer" class="flex flex-col items-center">
-                        <div class="level-badge px-3 py-1 flex items-center gap-2">
-                            <i class="fas fa-trophy text-xs"></i>
-                            <span class="text-xs font-bold ml-1" id="levelDisplay">Level 1</span>
-                        </div>
-                        <div class="level-progress-bar w-20 mt-1">
-                            <div id="levelProgressFill" class="level-progress-fill" style="width: 0%"></div>
-                        </div>
+                    <div class="bg-white/20 backdrop-blur px-3 py-1 rounded-full border border-white/30">
+                        <span class="text-xs font-bold ml-1" id="levelDisplay">Level 1</span>
                     </div>
                 </div>
             </div>
@@ -412,463 +427,195 @@
              </button>
         </div>
 
-        <!-- STATS (Now Live Graph in Analysis) -->
-        <div id="view-stats" class="hidden p-5 anim-fade pb-24 h-full flex flex-col justify-start pt-5">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-purple-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 text-center">লাইভ গ্রাফ</h2>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="bg-white p-4 rounded-xl shadow-lg border mb-6">
-                <div class="flex items-center gap-2 mb-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span><h3 class="text-sm font-bold text-gray-500">নেকি অর্জনের গ্রাফ</h3></div>
-                <canvas id="nekiChart"></canvas>
-            </div>
-            <div class="bg-white p-4 rounded-xl shadow-lg border">
-                <div class="flex items-center gap-2 mb-2"><span class="w-3 h-3 rounded-full bg-blue-500"></span><h3 class="text-sm font-bold text-gray-500">ভালো কাজ (XP) গ্রাফ</h3></div>
-                <canvas id="xpChart"></canvas>
-            </div>
-        </div>
-
-        <!-- ANALYSIS VIEW -->
+        <!-- ANALYSIS VIEW - SIMPLIFIED -->
         <div id="view-analysis" class="hidden p-5 anim-fade pb-24">
             <div class="flex justify-between items-center mb-6">
                 <button onclick="navigate('dashboard')" class="flex items-center text-gray-500 text-sm hover:text-purple-500"><i class="fas fa-arrow-left mr-2"></i> হোম</button>
-                <h2 class="text-xl font-bold text-gray-800 dark:text-white">বিশ্লেষণ কেন্দ্র</h2>
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">আপনার বিশ্লেষণ</h2>
                 <div class="w-8"></div>
             </div>
 
+            <!-- TIME FILTER -->
+            <div class="mb-6">
+                <h3 class="text-sm font-bold text-gray-600 dark:text-gray-400 mb-3">সময়কাল নির্বাচন করুন</h3>
+                <div class="flex gap-2 overflow-x-auto pb-2">
+                    <div class="filter-pill active" onclick="setAnalysisFilter('week')">সপ্তাহ</div>
+                    <div class="filter-pill" onclick="setAnalysisFilter('month')">মাস</div>
+                    <div class="filter-pill" onclick="setAnalysisFilter('year')">বছর</div>
+                    <div class="filter-pill" onclick="setAnalysisFilter('all')">সর্বমোট</div>
+                </div>
+            </div>
+
+            <!-- MAIN ANALYSIS CARDS -->
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <!-- আজকের আমল কার্ড - প্রথমে যোগ করা হয়েছে -->
-                <div onclick="navigateToAnalysis('today-details')" class="analysis-card">
-                    <i class="fas fa-calendar-day"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">আজকের আমল</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">বিস্তারিত রিপোর্ট</p>
-                </div>
-                <!-- LIVE GRAPH Added Here -->
-                <div onclick="navigateToAnalysis('stats')" class="analysis-card">
-                    <i class="fas fa-chart-area"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">লাইভ গ্রাফ</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">পরিসংখ্যান দেখুন</p>
-                </div>
-                <div onclick="navigateToAnalysis('attendance')" class="analysis-card">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">উপস্থিতি</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">মাসিক ক্যালেন্ডার</p>
-                </div>
-                <div onclick="navigateToAnalysis('progress')" class="analysis-card">
+                <div onclick="navigateToAnalysis('overview')" class="analysis-card">
                     <i class="fas fa-chart-line"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">অগ্রগতি</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">সাপ্তাহিক/মাসিক গ্রাফ</p>
-                </div>
-                <div onclick="navigateToAnalysis('history')" class="analysis-card">
-                    <i class="fas fa-history"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">ইতিহাস</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">নেকি ও জার্নাল</p>
-                </div>
-                <div onclick="navigateToAnalysis('targets')" class="analysis-card">
-                    <i class="fas fa-bullseye"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">টার্গেট</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">পূরন/মিস রেকর্ড</p>
+                    <h3>সার্বিক অবস্থা</h3>
+                    <p>আপনার সামগ্রিক অগ্রগতি</p>
                 </div>
                 <div onclick="navigateToAnalysis('time')" class="analysis-card">
                     <i class="fas fa-clock"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সময় ব্যয়</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">তাসবীহ সময়</p>
+                    <h3>সময় ব্যবস্থাপনা</h3>
+                    <p>ফোন ও তাসবীহ সময়</p>
                 </div>
-                <div onclick="navigateToAnalysis('recitation')" class="analysis-card">
-                    <i class="fas fa-quran"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">তাসবীহ পাঠ</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">বিস্তারিত রিপোর্ট</p>
+                <div onclick="navigateToAnalysis('ibadah')" class="analysis-card">
+                    <i class="fas fa-pray"></i>
+                    <h3>আমল ট্র্যাকিং</h3>
+                    <p>তাসবীহ ও লক্ষ্য</p>
                 </div>
-                <div onclick="navigateToAnalysis('wastage')" class="analysis-card">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-sm">সময় অপচয়</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">ফোন ব্যবহার বিশ্লেষণ</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- আজকের আমল বিশদ VIEW -->
-        <div id="view-today-details" class="hidden p-5 anim-fade">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-emerald-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">আজকের আমল</h3>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">আজকের তাসবীহ সমূহ</h4>
-                    <div id="todayTasbihDetails" class="space-y-3"></div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
-                        <div class="flex justify-between">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">মোট তাসবীহ:</span>
-                            <span class="text-sm font-bold text-emerald-600" id="todayTotalTasbih">0 বার</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">মোট নেকি:</span>
-                            <span class="text-sm font-bold text-emerald-600" id="todayTotalTasbihNeki">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">টার্গেট আমল</h4>
-                    <div id="todayTargetDetails" class="space-y-3"></div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700">
-                        <div class="flex justify-between">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">পূরন:</span>
-                            <span class="text-sm font-bold text-emerald-600" id="todayCompletedTargets">0/0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">বাকি:</span>
-                            <span class="text-sm font-bold text-red-600" id="todayPendingTargets">0/0</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">টার্গেট নেকি:</span>
-                            <span class="text-sm font-bold text-emerald-600" id="todayTargetNeki">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">আজকের সারাংশ</h4>
-                    <div class="text-center">
-                        <p class="text-2xl font-bold text-emerald-600" id="todayTotalNekiSummary">0</p>
-                        <p class="text-sm text-gray-500">আজকের মোট অর্জিত নেকি</p>
-                    </div>
+                <div onclick="navigateToAnalysis('progress')" class="analysis-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>উন্নতি গ্রাফ</h3>
+                    <p>সব গ্রাফ এক স্থানে</p>
                 </div>
             </div>
         </div>
 
-        <!-- ATTENDANCE VIEW -->
-        <div id="view-attendance" class="hidden p-5 anim-fade">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-emerald-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">উপস্থিতি ক্যালেন্ডার</h3>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="glass-folder p-4 mb-4">
-                <div class="flex justify-between items-center mb-3">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300" id="currentMonth"></h4>
-                    <div class="flex gap-2">
-                        <button onclick="changeMonth(-1)" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-chevron-left"></i></button>
-                        <button onclick="changeMonth(1)" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
-                <div class="grid grid-cols-7 gap-1 mb-2">
-                    <div class="text-center text-xs font-bold text-gray-500">রবি</div>
-                    <div class="text-center text-xs font-bold text-gray-500">সোম</div>
-                    <div class="text-center text-xs font-bold text-gray-500">মঙ্গল</div>
-                    <div class="text-center text-xs font-bold text-gray-500">বুধ</div>
-                    <div class="text-center text-xs font-bold text-gray-500">বৃহঃ</div>
-                    <div class="text-center text-xs font-bold text-gray-500">শুক্র</div>
-                    <div class="text-center text-xs font-bold text-gray-500">শনি</div>
-                </div>
-                <div id="calendarGrid" class="grid grid-cols-7 gap-1"></div>
-            </div>
-            
-            <div class="glass-folder p-4">
-                <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">উপস্থিতি সারাংশ</h4>
-                <div class="flex justify-between text-sm">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1"><div class="w-3 h-3 rounded-full bg-emerald-500"></div><span>উপস্থিত</span></div>
-                        <p class="text-lg font-bold text-emerald-600" id="presentDays">0 দিন</p>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 mb-1"><div class="w-3 h-3 rounded-full bg-red-500"></div><span>অনুপস্থিত</span></div>
-                        <p class="text-lg font-bold text-red-600" id="absentDays">0 দিন</p>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2 mb-1"><div class="w-3 h-3 rounded-full bg-blue-500"></div><span>উপস্থিতি হার</span></div>
-                        <p class="text-lg font-bold text-blue-600" id="attendanceRate">0%</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PROGRESS VIEW -->
-        <div id="view-progress" class="hidden p-5 anim-fade">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-blue-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">অগ্রগতি বিশ্লেষণ</h3>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সাপ্তাহিক আমল বন্টন</h4>
-                    <canvas id="weekPieChart" height="200"></canvas>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">মাসিক আমলের লেখচিত্র</h4>
-                    <canvas id="monthLineChart" height="150"></canvas>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">ভালো কাজের অগ্রগতি</h4>
-                    <canvas id="journalProgressChart" height="150"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- HISTORY VIEW -->
-        <div id="view-history" class="hidden p-5 anim-fade">
+        <!-- OVERVIEW ANALYSIS -->
+        <div id="view-overview" class="hidden p-5 anim-fade pb-24">
             <div class="flex justify-between items-center mb-4">
                 <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-purple-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">ইতিহাস বিশ্লেষণ</h3>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">সার্বিক অবস্থা</h3>
                 <div class="w-8"></div>
             </div>
             
             <div class="space-y-4">
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">নেকি ইতিহাস</h4>
-                    <div class="flex gap-2 mb-3">
-                        <button onclick="filterNekiHistory('week')" class="flex-1 py-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-sm font-bold">সপ্তাহ</button>
-                        <button onclick="filterNekiHistory('month')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">মাস</button>
-                        <button onclick="filterNekiHistory('year')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">বছর</button>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">আজকের সারাংশ</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">নেকি অর্জন</span>
+                                <span class="text-sm font-bold text-emerald-600" id="todayNekiOverview">0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="todayNekiProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">লক্ষ্য পূরন</span>
+                                <span class="text-sm font-bold text-blue-600" id="todayTargetOverview">0/0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="todayTargetProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="nekiHistoryStats" class="space-y-2"></div>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">জার্নাল ইতিহাস</h4>
-                    <div class="flex gap-2 mb-3">
-                        <button onclick="filterJournalHistory('week')" class="flex-1 py-2 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-sm font-bold">সপ্তাহ</button>
-                        <button onclick="filterJournalHistory('month')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">মাস</button>
-                        <button onclick="filterJournalHistory('year')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">বছর</button>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">উপস্থিতি </h4>
+                    <div class="text-center mb-3">
+                        <p class="text-3xl font-bold text-emerald-600" id="attendanceRateOverview">0%</p>
                     </div>
-                    <div id="journalHistoryStats" class="space-y-2"></div>
+                    
+                    <!-- Direct Calendar Embed -->
+                    <div id="miniCalendarContainer">
+                        <div class="calendar-grid mb-2">
+                            <div class="cal-header">রবি</div>
+                            <div class="cal-header">সোম</div>
+                            <div class="cal-header">মঙ্গল</div>
+                            <div class="cal-header">বুধ</div>
+                            <div class="cal-header">বৃহঃ</div>
+                            <div class="cal-header">শুক্র</div>
+                            <div class="cal-header">শনি</div>
+                        </div>
+                        <div id="miniCalendarDays" class="calendar-grid">
+                            <!-- Calendar days will be generated here -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- TARGETS VIEW -->
-        <div id="view-targets" class="hidden p-5 anim-fade">
-            <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-orange-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">টার্গেট বিশ্লেষণ</h3>
-                <div class="w-8"></div>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">সাম্প্রতিক পারফরমেন্স</h4>
-                    <div class="flex justify-between mb-2">
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">সপ্তাহ</p>
-                            <p class="text-lg font-bold text-emerald-600" id="weekTargets">0/0</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">মাস</p>
-                            <p class="text-lg font-bold text-emerald-600" id="monthTargets">0/0</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">সর্বমোট</p>
-                            <p class="text-lg font-bold text-emerald-600" id="totalTargets">0/0</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">মিস করা টার্গেট</h4>
-                    <div id="missedTargetsList" class="space-y-2 max-h-40 overflow-y-auto"></div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">পূরন করা টার্গেট</h4>
-                    <div id="completedTargetsList" class="space-y-2 max-h-40 overflow-y-auto"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TIME SPENT VIEW -->
-        <div id="view-time" class="hidden p-5 anim-fade">
+        <!-- TIME MANAGEMENT ANALYSIS -->
+        <div id="view-time" class="hidden p-5 anim-fade pb-24">
             <div class="flex justify-between items-center mb-4">
                 <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-teal-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">সময় ব্যয় বিশ্লেষণ</h3>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">সময় ব্যবস্থাপনা</h3>
                 <div class="w-8"></div>
             </div>
             
             <div class="space-y-4">
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">আজকের সময় ব্যয়</h4>
-                    <p class="text-3xl font-bold text-emerald-600" id="todayTasbihTime">0 ঘন্টা 0 মিনিট</p>
-                    <div id="todayTasbihBreakdown" class="mt-2 space-y-1">
-                        <!-- Breakdown per tasbih will be inserted here -->
-                    </div>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">ফোন ব্যবহার</h4>
+                    <p class="text-3xl font-bold text-red-600" id="phoneUsageTime">0 ঘন্টা 0 মিনিট</p>
+                    <p class="text-sm text-gray-500 mt-1">গতকাল</p>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সর্বমোট তাসবীহ সময়</h4>
-                    <p class="text-3xl font-bold text-emerald-600" id="totalTasbihTime">0 ঘন্টা 0 মিনিট</p>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">তাসবীহ সময়</h4>
+                    <p class="text-3xl font-bold text-emerald-600" id="tasbihTime">0 মিনিট</p>
+                    <p class="text-sm text-gray-500 mt-1">আজকে</p>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">গড় সময় ব্যয়</h4>
-                    <div class="flex justify-between">
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">প্রতিদিন গড়</p>
-                            <p class="text-lg font-bold text-emerald-600" id="avgDailyTime">0 মিনিট</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">প্রতি সপ্তাহ গড়</p>
-                            <p class="text-lg font-bold text-emerald-600" id="avgWeeklyTime">0 ঘন্টা</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-xs text-gray-500">প্রতি মাস গড়</p>
-                            <p class="text-lg font-bold text-emerald-600" id="avgMonthlyTime">0 ঘন্টা</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সময় ব্যয়ের গ্রাফ</h4>
-                    <canvas id="timeSpentChart" height="150"></canvas>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">সময়ের তুলনা </h4>
+                    <canvas id="timeComparisonChart" height="200"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- TASBIH RECITATION VIEW -->
-        <div id="view-recitation" class="hidden p-5 anim-fade">
+        <!-- IBADAH TRACKING -->
+        <div id="view-ibadah" class="hidden p-5 anim-fade pb-24">
             <div class="flex justify-between items-center mb-4">
                 <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-yellow-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">তাসবীহ পাঠ বিশ্লেষণ</h3>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">আমল ট্র্যাকিং</h3>
                 <div class="w-8"></div>
             </div>
             
             <div class="space-y-4">
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">প্রতিটি তাসবীহর পরিসংখ্যান</h4>
-                    <div id="tasbihStatsList" class="space-y-3 max-h-60 overflow-y-auto"></div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সময়কাল অনুযায়ী তাসবীহ পাঠ</h4>
-                    <div class="flex gap-2 mb-3">
-                        <button onclick="filterTasbih('week')" class="flex-1 py-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-sm font-bold">সপ্তাহ</button>
-                        <button onclick="filterTasbih('month')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">মাস</button>
-                        <button onclick="filterTasbih('year')" class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm">বছর</button>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">তাসবীহ পরিসংখ্যান</h4>
+                    <div id="tasbihStats" class="space-y-2">
+                        <!-- Tasbih stats will be loaded here -->
                     </div>
-                    <div id="tasbihPeriodStats"></div>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সম্ভাব্য নেকির পরিমাণ</h4>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">লক্ষ্য অর্জন</h4>
                     <div class="text-center">
-                        <p class="text-2xl font-bold text-emerald-600" id="estimatedNeki">0</p>
-                        <p class="text-sm text-gray-500">সম্ভাব্য নেকি (গড়ে প্রতি তাসবীহ ১০ নেকি)</p>
+                        <p class="text-3xl font-bold text-emerald-600" id="targetCompletionRate">0%</p>
+                        <p class="text-sm text-gray-500 mt-1">এই সপ্তাহে</p>
+                    </div>
+                </div>
+                
+                <div class="glass-folder p-4">
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">সর্বোচ্চ অর্জন</h4>
+                    <div id="topAchievements" class="space-y-2">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">লোড হচ্ছে...</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- WASTAGE VIEW -->
-        <div id="view-wastage" class="hidden p-5 anim-fade">
+        <!-- PROGRESS CHARTS -->
+        <div id="view-progress" class="hidden p-5 anim-fade pb-24">
             <div class="flex justify-between items-center mb-4">
-                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-red-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">সময় অপচয় বিশ্লেষণ</h3>
+                <button onclick="navigate('analysis')" class="flex items-center text-gray-500 text-sm hover:text-blue-500"><i class="fas fa-arrow-left mr-2"></i> বিশ্লেষণ</button>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">উন্নতি গ্রাফ</h3>
                 <div class="w-8"></div>
-            </div>
-            
-            <div class="glass-folder p-4 mb-4">
-                <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-3">
-                    <p class="text-red-600 dark:text-red-400 text-center font-bold text-lg">
-                        "কিয়ামতের দিন বনী আদমকে জিজ্ঞাসা করা হবে: তোমার যৌবনকে কোন কাজে নষ্ট করেছ? তোমার জীবনকে কিভাবে ব্যয় করেছ?" 
-                        <br>- তিরমিযি
-                    </p>
-                </div>
             </div>
             
             <div class="space-y-4">
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-3">প্রতিদিনের অপচয় থেকে ভবিষ্যৎ অপচয়</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">প্রতিদিনের গড় ফোন ব্যবহার:</span>
-                            <span class="font-bold text-red-600" id="dailyAvgPhoneUse">0 ঘন্টা 0 মিনিট</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">এক সপ্তাহে অপচয়:</span>
-                            <span class="font-bold text-red-600" id="weeklyWastage">0 ঘন্টা</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">এক মাসে অপচয়:</span>
-                            <span class="font-bold text-red-600" id="monthlyWastage">0 ঘন্টা</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">এক বছরে অপচয়:</span>
-                            <span class="font-bold text-red-600" id="yearlyWastage">0 ঘন্টা</span>
-                        </div>
-                    </div>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">নেকির প্রবৃদ্ধি </h4>
+                    <canvas id="nekiGrowthChart" height="200"></canvas>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">গতকালকের ফোন ব্যবহার</h4>
-                    <div class="text-center">
-                        <p class="text-3xl font-bold text-red-600" id="yesterdayPhoneUse">0 ঘন্টা 0 মিনিট</p>
-                        <p class="text-sm text-gray-500 mt-1">এই সময়ে আপনি <span id="potentialTasbihCount" class="font-bold text-emerald-600">0</span> বার তাসবীহ পড়তে পারতেন</p>
-                    </div>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সাপ্তাহিক কার্যক্রম</h4>
+                    <canvas id="weeklyActivityChart" height="200"></canvas>
                 </div>
                 
                 <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">সাম্প্রতিক ফোন ব্যবহার রেকর্ড</h4>
-                    <canvas id="phoneUsageChart" height="150"></canvas>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">গড় ফোন ব্যবহার তুলনা</h4>
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">গত সপ্তাহে গড়:</span>
-                            <span class="font-bold text-red-600" id="weeklyAvgUse">0 ঘন্টা/দিন</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">গত মাসে গড়:</span>
-                            <span class="font-bold text-red-600" id="monthlyAvgUse">0 ঘন্টা/দিন</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">গত ৭ দিনে মোট:</span>
-                            <span class="font-bold text-red-600" id="lastWeekTotal">0 ঘন্টা</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">গত ৩০ দিনে মোট:</span>
-                            <span class="font-bold text-red-600" id="lastMonthTotal">0 ঘন্টা</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-folder p-4">
-                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">অপচয় থেকে সম্ভাব্য লাভ</h4>
-                    <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-3">
-                        <p class="text-sm text-emerald-700 dark:text-emerald-400">
-                            যদি আপনি প্রতিদিন ফোন ব্যবহার <span id="reduceBy" class="font-bold">30</span> মিনিট কমাতেন, তাহলে:
-                        </p>
-                        <div class="mt-2 space-y-1">
-                            <div class="flex justify-between">
-                                <span class="text-xs text-gray-600">সপ্তাহে বাঁচত:</span>
-                                <span class="text-xs font-bold text-emerald-600">3.5 ঘন্টা</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-xs text-gray-600">মাসে বাঁচত:</span>
-                                <span class="text-xs font-bold text-emerald-600">15 ঘন্টা</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-xs text-gray-600">বছরে বাঁচত:</span>
-                                <span class="text-xs font-bold text-emerald-600">182.5 ঘন্টা</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-xs text-gray-600">অতিরিক্ত তাসবীহ:</span>
-                                <span class="text-xs font-bold text-emerald-600">10,950 বার</span>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="font-bold text-gray-700 dark:text-gray-300 mb-2">তাসবীহ বন্টন</h4>
+                    <canvas id="tasbihDistributionChart" height="200"></canvas>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- END SCROLLABLE CONTAINER -->
 
@@ -897,7 +644,7 @@
         <button onclick="resetSimple()" class="mt-10 px-6 py-2 rounded-full border border-red-200 text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 active:scale-95"><i class="fas fa-rotate-right mr-2"></i>রিসেট</button>
     </div>
 
-    <!-- BOTTOM NAV - UPDATED (Removed Graph/Stats) -->
+    <!-- BOTTOM NAV -->
     <div id="bottomNavBar" class="fixed bottom-0 w-full bg-white dark:bg-[#0f172a] dark:border-slate-800 border-t flex justify-around py-3 z-40 shadow-[0_-5px_10px_rgba(0,0,0,0.05)] transition-transform duration-300">
         <button onclick="navigate('dashboard')" id="nav-home" class="nav-item active flex flex-col items-center w-1/3 text-emerald-600 dark:text-emerald-400">
             <i class="fas fa-home text-lg"></i><span class="text-[10px] font-bold">হোম</span>
@@ -1028,10 +775,9 @@
     </div> <!-- End of mainAppContainer -->
 
     <script>
-        const DB_KEY = 'akhirah_v30_complete';
+        const DB_KEY = 'akhirah_v31_simplified';
         const THEME_KEY = 'akhirah_theme_pref';
         const PHONE_USAGE_ASKED_KEY = 'akhirah_phone_asked';
-        const DAILY_REPORT_SHOWN_KEY = 'akhirah_daily_report_shown';
         
         const DEFAULTS_TEMPLATE = [
             { id: '1', title: 'সুবহানাল্লাহ', arabic: 'سُبْحَانَ ٱللَّٰهِ', type: 'counter', days: 'daily' },
@@ -1041,7 +787,7 @@
             { id: '5', title: 'আস্তাগফিরুল্লাহ', arabic: 'أَسْتَغْفِرُ اللّٰهَ', type: 'counter', days: 'daily' },
             { id: '6', title: 'সূরা বাকারার শেষ ৩ আয়াত', type: 'fixed', manualReward: 2500, arabic: '...', bangla: 'কুরআন থেকে দেখে পড়ুন', days: 'daily' },
             { id: '7', title: 'সূরা আর রহমান', type: 'fixed', manualReward: 16000, arabic: '...', bangla: 'কুরআন থেকে দেখে পড়ুন', days: 'daily' },
-            { id: '8', title: 'আয়াতুল কুরসি', type: 'fixed', manualReward: 1700, arabic: 'কুরআন থেকে দেখে পড়ুন', bangla: 'আল্লাহ ছাড়া কোনো মাবুদ নেই...', days: 'daily' }
+            { id: '8', title: 'আয়াতুল কুরসি', type: 'fixed', manualReward: 1700, arabic: 'কুরআন থেকে দেখে পড়ুন', bangla: '...', days: 'daily' }
         ];
 
         // Main Data Object
@@ -1049,13 +795,13 @@
             totalNeki: 0, todayNeki: 0, totalXp: 0, lastDate: new Date().toDateString(), 
             dailyCounts: {}, items: [], journal: [], history: [], 
             messages: [], lastReportDate: '', sentRemindersDate: '', sentRemindersFlags: [false, false, false],
-            // New fields for analysis
             attendance: [], // Array of dates when user performed any action
-            timeSpent: {}, // Object to store time spent in tasbih: {tasbihId: {date: seconds}}
-            targetCompletion: {}, // Store target completion history with dates
+            timeSpent: {}, // Object to store time spent in tasbih
+            targetCompletion: {}, // Store target completion history
             focusTimer: {totalSeconds: 0, startTime: null, isRunning: false, currentTasbihId: null},
             phoneUsage: [], // Array of {date: string, hours: number, minutes: number}
-            firstOpen: false
+            firstOpen: false,
+            analysisFilter: 'week' // Default filter
         };
         
         let currentFocusId = null;
@@ -1070,9 +816,510 @@
         let timerSeconds = 0;
         let isTimerRunning = false;
         
-        // Calendar variables
-        let currentCalendarMonth = new Date().getMonth();
-        let currentCalendarYear = new Date().getFullYear();
+        // Analysis Module
+        const AnalysisModule = {
+            currentFilter: 'week',
+            
+            setFilter: function(filter) {
+                this.currentFilter = filter;
+                document.querySelectorAll('.filter-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                this.updateAllAnalysis();
+            },
+            
+            getFilteredData: function() {
+                const now = new Date();
+                let startDate;
+                
+                switch(this.currentFilter) {
+                    case 'week':
+                        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                        break;
+                    case 'month':
+                        startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                        break;
+                    case 'year':
+                        startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+                        break;
+                    default:
+                        startDate = new Date(0); // All time
+                }
+                
+                return {
+                    history: appData.history.filter(h => new Date(h.date) >= startDate),
+                    journal: appData.journal.filter(j => new Date(j.date) >= startDate),
+                    attendance: appData.attendance.filter(a => new Date(a) >= startDate),
+                    phoneUsage: appData.phoneUsage.filter(p => new Date(p.date) >= startDate)
+                };
+            },
+            
+            updateOverview: function() {
+                // Today's neki progress
+                const maxDailyNeki = 10000; // Arbitrary max for progress bar
+                const todayNekiProgress = Math.min(100, (appData.todayNeki / maxDailyNeki) * 100);
+                document.getElementById('todayNekiProgress').style.width = todayNekiProgress + '%';
+                document.getElementById('todayNekiOverview').textContent = appData.todayNeki.toLocaleString();
+                
+                // Target completion
+                const fixedItems = appData.items.filter(item => item.type === 'fixed');
+                const completedToday = fixedItems.filter(item => appData.dailyCounts[item.id]).length;
+                const targetProgress = fixedItems.length > 0 ? (completedToday / fixedItems.length) * 100 : 0;
+                
+                document.getElementById('todayTargetProgress').style.width = targetProgress + '%';
+                document.getElementById('todayTargetOverview').textContent = completedToday + '/' + fixedItems.length;
+                
+                // Attendance rate (Current Month)
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getFullYear();
+                const monthAttendance = appData.attendance.filter(date => {
+                    const dateObj = new Date(date);
+                    return dateObj.getMonth() === currentMonth && dateObj.getFullYear() === currentYear;
+                }).length;
+                
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                const currentDay = new Date().getDate();
+                const daysPassed = Math.min(currentDay, daysInMonth);
+                const attendanceRate = daysPassed > 0 ? Math.round((monthAttendance / daysPassed) * 100) : 0;
+                
+                document.getElementById('attendanceRateOverview').textContent = attendanceRate + '%';
+                
+                // Render Direct Calendar
+                this.renderCalendar();
+            },
+            
+            renderCalendar: function() {
+                const daysContainer = document.getElementById('miniCalendarDays');
+                daysContainer.innerHTML = '';
+                
+                const now = new Date();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
+                const todayDate = now.getDate();
+                
+                // Days in month
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+                // First day of week (0-6)
+                const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+                
+                // Empty slots for days before 1st
+                for(let i=0; i<firstDay; i++) {
+                    const el = document.createElement('div');
+                    daysContainer.appendChild(el);
+                }
+                
+                // Calendar Days
+                for(let i=1; i<=daysInMonth; i++) {
+                    const dateStr = new Date(currentYear, currentMonth, i).toDateString();
+                    const el = document.createElement('div');
+                    el.className = 'calendar-day';
+                    el.textContent = i;
+                    
+                    const isFuture = i > todayDate;
+                    const hasAttendance = appData.attendance.includes(dateStr);
+                    
+                    if (hasAttendance) {
+                        el.classList.add('bg-emerald-500', 'text-white'); // Green for attendance
+                    } else if (!isFuture) {
+                        el.classList.add('bg-red-500', 'text-white'); // Red for absent (past)
+                    } else {
+                        el.classList.add('text-gray-400', 'dark:text-gray-600'); // Future
+                    }
+                    
+                    daysContainer.appendChild(el);
+                }
+            },
+            
+            updateTimeManagement: function() {
+                // Phone usage
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                const yesterdayUsage = appData.phoneUsage.find(u => u.date === yesterday);
+                
+                if (yesterdayUsage) {
+                    document.getElementById('phoneUsageTime').textContent = 
+                        yesterdayUsage.hours + " ঘন্টা " + yesterdayUsage.minutes + " মিনিট";
+                } else {
+                    document.getElementById('phoneUsageTime').textContent = "ডাটা নেই";
+                }
+                
+                // Tasbih time today
+                const today = new Date().toDateString();
+                let todaySeconds = 0;
+                Object.values(appData.timeSpent).forEach(tasbihData => {
+                    if (tasbihData[today]) {
+                        todaySeconds += tasbihData[today];
+                    }
+                });
+                
+                const todayMinutes = Math.round(todaySeconds / 60);
+                document.getElementById('tasbihTime').textContent = todayMinutes + " মিনিট";
+                
+                // Time comparison chart
+                this.renderTimeComparisonChart();
+            },
+            
+            renderTimeComparisonChart: function() {
+                const ctx = document.getElementById('timeComparisonChart').getContext('2d');
+                
+                // Collect all dates from start of usage
+                // We'll use appData.history or appData.phoneUsage as a base
+                // If history is empty, use last 7 days
+                let allDates = [];
+                
+                // Collect dates from history
+                appData.history.forEach(h => allDates.push(h.date));
+                // Collect dates from phone usage
+                appData.phoneUsage.forEach(p => allDates.push(p.date));
+                
+                // Remove duplicates and sort
+                allDates = [...new Set(allDates)].sort((a,b) => new Date(a) - new Date(b));
+                
+                // If no history, default to last 7 days
+                if(allDates.length === 0) {
+                     for (let i = 6; i >= 0; i--) {
+                        const date = new Date();
+                        date.setDate(date.getDate() - i);
+                        allDates.push(date.toDateString());
+                     }
+                } else {
+                    // Ensure today is included if not already
+                    const today = new Date().toDateString();
+                    if(allDates[allDates.length-1] !== today) {
+                        allDates.push(today);
+                    }
+                }
+
+                const labels = [];
+                const phoneData = [];
+                const tasbihData = [];
+                
+                allDates.forEach(dateStr => {
+                    const dateObj = new Date(dateStr);
+                    labels.push(dateObj.toLocaleDateString('bn-BD', { month: 'short', day: 'numeric' }));
+                    
+                    // Phone usage
+                    const phoneUsage = appData.phoneUsage.find(u => u.date === dateStr);
+                    phoneData.push(phoneUsage ? Math.round(phoneUsage.totalMinutes / 60 * 10) / 10 : 0);
+                    
+                    // Tasbih time
+                    let tasbihSeconds = 0;
+                    Object.values(appData.timeSpent).forEach(tasbihDataObj => {
+                        if (tasbihDataObj[dateStr]) {
+                            tasbihSeconds += tasbihDataObj[dateStr];
+                        }
+                    });
+                    tasbihData.push(Math.round(tasbihSeconds / 60)); // Convert to minutes
+                });
+                
+                if (window.timeComparisonChart) {
+                    window.timeComparisonChart.destroy();
+                }
+                
+                window.timeComparisonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'ফোন (ঘন্টা)',
+                                data: phoneData,
+                                backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                                borderColor: 'rgb(239, 68, 68)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'তাসবীহ (মিনিট)',
+                                data: tasbihData,
+                                backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                                borderColor: 'rgb(16, 185, 129)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            },
+            
+            updateIbadahTracking: function() {
+                // Tasbih stats - SHOW ALL, Live Update, Red if 0
+                const tasbihItems = appData.items.filter(item => item.type === 'counter');
+                const tasbihStats = document.getElementById('tasbihStats');
+                tasbihStats.innerHTML = '';
+                
+                if (tasbihItems.length === 0) {
+                    tasbihStats.innerHTML = '<p class="text-sm text-gray-500 text-center">কোনো তাসবীহ নেই</p>';
+                } else {
+                    tasbihItems.forEach(item => {
+                        const count = appData.dailyCounts[item.id] || 0;
+                        const el = document.createElement('div');
+                        el.className = 'flex justify-between items-center py-1 border-b dark:border-gray-700 last:border-0';
+                        
+                        const textColorClass = count > 0 ? 'text-gray-600 dark:text-gray-400' : 'text-red-500 font-medium';
+                        const countColorClass = count > 0 ? 'text-emerald-600 font-bold' : 'text-red-500 font-bold';
+
+                        el.innerHTML = `
+                            <span class="text-sm ${textColorClass}">${item.title}</span>
+                            <span class="${countColorClass}">${count.toLocaleString()}</span>
+                        `;
+                        tasbihStats.appendChild(el);
+                    });
+                }
+                
+                // Target completion rate
+                const fixedItems = appData.items.filter(item => item.type === 'fixed');
+                const completedThisWeek = fixedItems.filter(item => {
+                    // Simple check - if done today, consider done for week
+                    return appData.dailyCounts[item.id];
+                }).length;
+                
+                const completionRate = fixedItems.length > 0 ? Math.round((completedThisWeek / fixedItems.length) * 100) : 0;
+                document.getElementById('targetCompletionRate').textContent = completionRate + '%';
+                
+                // Top achievements
+                this.showTopAchievements();
+            },
+            
+            showTopAchievements: function() {
+                const topAchievements = document.getElementById('topAchievements');
+                const achievements = [];
+                
+                // Check for high tasbih counts
+                const tasbihItems = appData.items.filter(item => item.type === 'counter');
+                tasbihItems.forEach(item => {
+                    const count = appData.dailyCounts[item.id] || 0;
+                    if (count >= 100) {
+                        achievements.push({
+                            text: `${item.title} - ${count.toLocaleString()} বার`,
+                            icon: 'fa-trophy',
+                            color: 'text-yellow-500'
+                        });
+                    } else if (count >= 50) {
+                        achievements.push({
+                            text: `${item.title} - ${count.toLocaleString()} বার`,
+                            icon: 'fa-star',
+                            color: 'text-emerald-500'
+                        });
+                    }
+                });
+                
+                // Check for completed targets
+                const fixedItems = appData.items.filter(item => item.type === 'fixed');
+                const completedCount = fixedItems.filter(item => appData.dailyCounts[item.id]).length;
+                if (completedCount === fixedItems.length && fixedItems.length > 0) {
+                    achievements.push({
+                        text: 'সব লক্ষ্য পূরন করেছেন!',
+                        icon: 'fa-check-circle',
+                        color: 'text-green-500'
+                    });
+                }
+                
+                // Check attendance streak
+                const today = new Date();
+                let streak = 0;
+                for (let i = 0; i < 30; i++) {
+                    const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
+                    const dateStr = date.toDateString();
+                    if (appData.attendance.includes(dateStr)) {
+                        streak++;
+                    } else {
+                        break;
+                    }
+                }
+                
+                if (streak >= 7) {
+                    achievements.push({
+                        text: `${streak} দিন ধারাবাহিক আমল`,
+                        icon: 'fa-fire',
+                        color: 'text-orange-500'
+                    });
+                }
+                
+                topAchievements.innerHTML = '';
+                
+                if (achievements.length === 0) {
+                    topAchievements.innerHTML = '<p class="text-sm text-gray-500 text-center">এখনো কোনো বিশেষ অর্জন নেই</p>';
+                } else {
+                    achievements.slice(0, 3).forEach(achievement => {
+                        const el = document.createElement('div');
+                        el.className = 'flex items-center gap-2';
+                        el.innerHTML = `
+                            <i class="fas ${achievement.icon} ${achievement.color}"></i>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 flex-1">${achievement.text}</p>
+                        `;
+                        topAchievements.appendChild(el);
+                    });
+                }
+            },
+            
+            updateProgressCharts: function() {
+                this.renderNekiGrowthChart();
+                this.renderWeeklyActivityChart();
+                this.renderTasbihDistributionChart();
+            },
+            
+            renderNekiGrowthChart: function() {
+                const ctx = document.getElementById('nekiGrowthChart').getContext('2d');
+                const filteredData = this.getFilteredData();
+                
+                // Prepare data for chart
+                const labels = [];
+                const data = [];
+                
+                // Group by date
+                const groupedData = {};
+                filteredData.history.forEach(h => {
+                    if (!groupedData[h.date]) {
+                        groupedData[h.date] = 0;
+                    }
+                    groupedData[h.date] += h.neki || 0;
+                });
+                
+                // Sort dates and get ALL entries (NO slicing)
+                const sortedDates = Object.keys(groupedData).sort((a,b) => new Date(a) - new Date(b));
+                
+                sortedDates.forEach(date => {
+                    const dateObj = new Date(date);
+                    labels.push(dateObj.toLocaleDateString('bn-BD', { month: 'short', day: 'numeric' }));
+                    data.push(groupedData[date]);
+                });
+                
+                if (window.nekiGrowthChart) {
+                    window.nekiGrowthChart.destroy();
+                }
+                
+                window.nekiGrowthChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'নেকি অর্জন',
+                            data: data,
+                            borderColor: 'rgb(16, 185, 129)',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            },
+            
+            renderWeeklyActivityChart: function() {
+                const ctx = document.getElementById('weeklyActivityChart').getContext('2d');
+                
+                // Activity by day of week
+                const days = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
+                const activityData = [0, 0, 0, 0, 0, 0, 0];
+                
+                // Calculate activity based on attendance (last 30 days)
+                const last30Days = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+                const recentAttendance = appData.attendance.filter(a => new Date(a) >= last30Days);
+                
+                recentAttendance.forEach(dateStr => {
+                    const date = new Date(dateStr);
+                    const dayOfWeek = date.getDay(); // 0 = Sunday
+                    activityData[dayOfWeek]++;
+                });
+                
+                if (window.weeklyActivityChart) {
+                    window.weeklyActivityChart.destroy();
+                }
+                
+                window.weeklyActivityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: days,
+                        datasets: [{
+                            label: 'কার্যকরী দিন',
+                            data: activityData,
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            
+            renderTasbihDistributionChart: function() {
+                const ctx = document.getElementById('tasbihDistributionChart').getContext('2d');
+                const tasbihItems = appData.items.filter(item => item.type === 'counter');
+                
+                if (tasbihItems.length === 0) {
+                    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                    ctx.fillStyle = '#9ca3af';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('কোনো ডাটা নেই', ctx.canvas.width/2, ctx.canvas.height/2);
+                    return;
+                }
+                
+                const labels = tasbihItems.map(item => item.title.substring(0, 10) + (item.title.length > 10 ? '...' : ''));
+                const data = tasbihItems.map(item => appData.dailyCounts[item.id] || 0);
+                const backgroundColors = [
+                    'rgba(16, 185, 129, 0.7)',
+                    'rgba(59, 130, 246, 0.7)',
+                    'rgba(139, 92, 246, 0.7)',
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(245, 158, 11, 0.7)'
+                ];
+                
+                if (window.tasbihDistributionChart) {
+                    window.tasbihDistributionChart.destroy();
+                }
+                
+                window.tasbihDistributionChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: backgroundColors.slice(0, tasbihItems.length),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            },
+            
+            updateAllAnalysis: function() {
+                this.updateOverview();
+                this.updateTimeManagement();
+                this.updateIbadahTracking();
+                this.updateProgressCharts();
+            }
+        };
 
         document.addEventListener('DOMContentLoaded', () => { 
             // Check if phone usage has been asked today
@@ -1094,11 +1341,38 @@
                 document.getElementById('phoneUsageModal').classList.add('hidden');
                 document.getElementById('mainAppContainer').classList.remove('hidden');
                 renderAll();
+                
+                // Start analysis precomputation
+                setTimeout(() => {
+                    AnalysisModule.updateAllAnalysis();
+                }, 500);
             }
             
             loadTheme();
             requestNotificationPermission();
+            
+            // Auto-delete old messages (older than 48 hours)
+            setInterval(deleteOldMessages, 3600000); // Check every hour
         });
+
+        function deleteOldMessages() {
+            const now = Date.now();
+            const fortyEightHoursAgo = now - (48 * 60 * 60 * 1000);
+            
+            // Filter out messages older than 48 hours
+            const originalLength = appData.messages.length;
+            appData.messages = appData.messages.filter(msg => {
+                // Convert message date to timestamp
+                const msgTime = new Date(msg.id).getTime();
+                return msgTime > fortyEightHoursAgo;
+            });
+            
+            if (originalLength !== appData.messages.length) {
+                saveData();
+                updateInboxIndicator();
+                console.log(`Deleted ${originalLength - appData.messages.length} old messages`);
+            }
+        }
 
         function savePhoneUsage() {
             const hours = parseInt(document.getElementById('phoneHours').value) || 0;
@@ -1137,6 +1411,11 @@
             // Initialize app
             renderAll();
             
+            // Start analysis
+            setTimeout(() => {
+                AnalysisModule.updateAllAnalysis();
+            }, 500);
+            
             // Check schedule
             checkSchedule();
             setInterval(() => {
@@ -1163,7 +1442,6 @@
             isDarkMode = true; 
             localStorage.setItem(THEME_KEY, 'dark');
             document.getElementById('themeIcon').classList.replace('fa-moon', 'fa-sun'); 
-            updateChartColors();
             if(currentFocusId) drawTree(appData.dailyCounts[currentFocusId]); 
         }
         
@@ -1172,12 +1450,7 @@
             isDarkMode = false; 
             localStorage.setItem(THEME_KEY, 'light');
             document.getElementById('themeIcon').classList.replace('fa-sun', 'fa-moon'); 
-            updateChartColors();
             if(currentFocusId) drawTree(appData.dailyCounts[currentFocusId]); 
-        }
-        
-        function updateChartColors() { 
-            if(window.Chart && document.getElementById('view-stats').classList.contains('hidden') === false) loadCharts(); 
         }
 
         function loadData() {
@@ -1199,6 +1472,7 @@
                     if(!appData.targetCompletion) appData.targetCompletion = {};
                     if(!appData.focusTimer) appData.focusTimer = {totalSeconds: 0, startTime: null, isRunning: false, currentTasbihId: null};
                     if(!appData.phoneUsage) appData.phoneUsage = [];
+                    if(!appData.analysisFilter) appData.analysisFilter = 'week';
                     
                     checkDay(); 
                 } catch(e) { initCounts(); } 
@@ -1217,6 +1491,7 @@
             if(appData.targetCompletion === undefined) appData.targetCompletion = {};
             if(appData.focusTimer === undefined) appData.focusTimer = {totalSeconds: 0, startTime: null, isRunning: false, currentTasbihId: null};
             if(appData.phoneUsage === undefined) appData.phoneUsage = [];
+            if(appData.analysisFilter === undefined) appData.analysisFilter = 'week';
             
             saveData();
         }
@@ -1247,9 +1522,6 @@
                 appData.sentRemindersDate = today;
                 appData.sentRemindersFlags = [false, false, false];
                 
-                // Reset daily report shown flag
-                localStorage.removeItem(DAILY_REPORT_SHOWN_KEY);
-                
                 saveData(); 
                 renderAll();
             } else {
@@ -1272,9 +1544,12 @@
                 appData.sentRemindersFlags = [false, false, false];
             }
 
-            // Daily report only once per day when app is opened
-            // We'll generate it when user opens app for first time today
-            // and only if it hasn't been generated yet
+            // --- Daily report logic (04:30 AM = 270 mins) ---
+            const REPORT_TIME_MINS = 270;
+            // If it's 04:30 AM or later AND we haven't generated a report for today yet
+            if (timeInMins >= REPORT_TIME_MINS && appData.lastReportDate !== nowStr) {
+                generateDailyReportIfNeeded();
+            }
             
             // Reminder 1: 05:00 AM (300 mins) - Slot 0
             if (timeInMins >= 300 && !appData.sentRemindersFlags[0]) {
@@ -1301,13 +1576,12 @@
             saveData();
         }
 
-        // Generate daily report only once per day when app opens
+        // Generate daily report only once per day at 4:30 AM or later
         function generateDailyReportIfNeeded() {
             const today = new Date().toDateString();
-            const dailyReportShown = localStorage.getItem(DAILY_REPORT_SHOWN_KEY);
             
             // Only generate if not already generated today
-            if (appData.lastReportDate !== today && dailyReportShown !== today) {
+            if (appData.lastReportDate !== today) {
                 // Retrieve history for the last day (yesterday)
                 let yesterdayStats = { neki: 0, date: 'Yesterday' };
                 if(appData.history.length > 0) {
@@ -1329,7 +1603,6 @@
                 sendSystemNotification("আপনার গতদিনের আমলের রিপোর্ট এসেছে।");
                 
                 appData.lastReportDate = today;
-                localStorage.setItem(DAILY_REPORT_SHOWN_KEY, today);
                 saveData();
             }
         }
@@ -1357,6 +1630,12 @@
                 read: false,
                 date: new Date().toLocaleTimeString()
             });
+            
+            // Keep only last 100 messages
+            if (appData.messages.length > 100) {
+                appData.messages = appData.messages.slice(0, 100);
+            }
+            
             updateInboxIndicator();
             saveData();
         }
@@ -1440,20 +1719,21 @@
 
         function navigate(viewId) {
             // Hide all views
-            const allViews = ['dashboard', 'tasbih-list', 'fixed-list', 'journal', 'stats', 'analysis', 
-                            'today-details', 'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
+            const allViews = ['dashboard', 'tasbih-list', 'fixed-list', 'journal', 'analysis', 
+                            'overview', 'time', 'ibadah', 'progress'];
             allViews.forEach(v => {
                 const el = document.getElementById('view-'+v);
                 if(el) el.classList.add('hidden');
             });
             
             // Show requested view
-            const viewEl = document.getElementById('view-'+viewId);
-            if (viewEl) viewEl.classList.remove('hidden');
+            document.getElementById('view-'+viewId).classList.remove('hidden');
             
-            // Toggle Header - Hide header on analysis subpages and stats
-            const analysisSubpages = ['stats', 'today-details', 'attendance', 'progress', 'history', 'targets', 'time', 'recitation', 'wastage'];
-            if (analysisSubpages.includes(viewId)) {
+            // Toggle Header Visibility Logic
+            // Hides header for Analysis sub-pages (overview, time, ibadah, progress) and stats
+            const noHeaderViews = ['stats', 'analysis', 'overview', 'time', 'ibadah', 'progress', 'focus'];
+            
+            if (noHeaderViews.includes(viewId)) {
                 document.getElementById('mainHeader').classList.add('hidden');
             } else {
                 document.getElementById('mainHeader').classList.remove('hidden');
@@ -1471,7 +1751,8 @@
             
             let active = 'home';
             if(viewId === 'journal') active = 'journal';
-            else if(viewId === 'stats' || viewId.startsWith('analysis') || viewId === 'analysis') active = 'analysis';
+            else if(viewId === 'analysis' || viewId === 'overview' || viewId === 'time' || 
+                   viewId === 'ibadah' || viewId === 'progress') active = 'analysis';
             
             const activeEl = document.getElementById('nav-'+active);
             if(activeEl) {
@@ -1480,22 +1761,20 @@
             }
 
             // Load specific data for views
-            if(viewId === 'stats') loadCharts();
-            if(viewId === 'today-details') renderTodayDetails();
-            if(viewId === 'attendance') renderCalendar();
-            if(viewId === 'progress') renderProgressCharts();
-            if(viewId === 'history') { 
-                filterNekiHistory('week'); 
-                filterJournalHistory('week'); 
+            if(viewId === 'analysis') {
+                AnalysisModule.updateAllAnalysis();
             }
-            if(viewId === 'targets') renderTargetAnalysis();
-            if(viewId === 'time') renderTimeSpentAnalysis();
-            if(viewId === 'recitation') renderTasbihRecitation();
-            if(viewId === 'wastage') renderWastageAnalysis();
-            
-            // Generate daily report when opening app
-            if (viewId === 'dashboard') {
-                generateDailyReportIfNeeded();
+            if(viewId === 'overview') {
+                AnalysisModule.updateOverview();
+            }
+            if(viewId === 'time') {
+                AnalysisModule.updateTimeManagement();
+            }
+            if(viewId === 'ibadah') {
+                AnalysisModule.updateIbadahTracking();
+            }
+            if(viewId === 'progress') {
+                AnalysisModule.updateProgressCharts();
             }
         }
 
@@ -1503,49 +1782,18 @@
             navigate(viewId);
         }
 
-        // Updated function to handle level badge and progress
+        function setAnalysisFilter(filter) {
+            AnalysisModule.setFilter(filter);
+        }
+
+        function showCalendar() {
+            // This function is no longer used but kept to prevent errors if referenced
+        }
+
         function updateUI() {
             document.getElementById('totalNeki').innerText = appData.totalNeki.toLocaleString();
             document.getElementById('totalXp').innerText = appData.totalXp.toLocaleString();
-            
-            // Calculate level and progress
-            const currentLevel = 1 + Math.floor(appData.totalNeki / 10000);
-            const nextLevelNeki = currentLevel * 10000;
-            const currentLevelStartNeki = (currentLevel - 1) * 10000;
-            const progressPercentage = ((appData.totalNeki - currentLevelStartNeki) / 10000) * 100;
-            
-            document.getElementById('levelDisplay').innerText = `Level ${currentLevel}`;
-            
-            // Update level badge with dynamic gradient
-            const levelBadge = document.querySelector('.level-badge');
-            const levelColors = [
-                {bg: 'linear-gradient(135deg, #10b981, #059669)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #ec4899, #be185d)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #f59e0b, #d97706)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #ef4444, #dc2626)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #06b6d4, #0891b2)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #84cc16, #65a30d)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #f97316, #ea580c)', text: 'white'},
-                {bg: 'linear-gradient(135deg, #6366f1, #4f46e5)', text: 'white'}
-            ];
-            
-            const colorIndex = (currentLevel - 1) % levelColors.length;
-            levelBadge.style.background = levelColors[colorIndex].bg;
-            levelBadge.style.color = levelColors[colorIndex].text;
-            
-            // Add trophy emoji every 10 levels
-            const trophyEmoji = currentLevel >= 10 ? '🏆 ' : '';
-            levelBadge.innerHTML = `<i class="fas fa-trophy text-xs"></i> <span class="text-xs font-bold ml-1">${trophyEmoji}Level ${currentLevel}</span>`;
-            
-            // Update progress bar
-            const progressBar = document.getElementById('levelProgressFill');
-            progressBar.style.width = `${Math.min(100, progressPercentage)}%`;
-            
-            // Update next level tooltip
-            const remainingNeki = nextLevelNeki - appData.totalNeki;
-            progressBar.title = `পরবর্তী লেভেলে যেতে বাকি: ${remainingNeki.toLocaleString()} নেকি`;
+            document.getElementById('levelDisplay').innerText = `Level ${1 + Math.floor(appData.totalNeki / 10000)}`;
             
             const tNekiEl = document.getElementById('todayNeki');
             tNekiEl.innerText = appData.todayNeki.toLocaleString();
@@ -1622,109 +1870,6 @@
                     fList.appendChild(el);
                 }
             });
-        }
-
-        // --- আজকের আমল বিশদ VIEW ফাংশন ---
-        function renderTodayDetails() {
-            const tasbihContainer = document.getElementById('todayTasbihDetails');
-            const targetContainer = document.getElementById('todayTargetDetails');
-            tasbihContainer.innerHTML = '';
-            targetContainer.innerHTML = '';
-            
-            let todayTotalTasbih = 0;
-            let todayTotalTasbihNeki = 0;
-            let todayCompletedTargets = 0;
-            let todayTotalTargets = 0;
-            let todayTargetNeki = 0;
-            
-            // Today's tasbih details
-            const tasbihItems = appData.items.filter(item => item.type === 'counter');
-            tasbihItems.forEach(item => {
-                const count = appData.dailyCounts[item.id] || 0;
-                if (count > 0) {
-                    const reward = count * 10; // Assuming 10 neki per tasbih
-                    todayTotalTasbih += count;
-                    todayTotalTasbihNeki += reward;
-                    
-                    const el = document.createElement('div');
-                    el.className = 'flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-800 rounded-lg';
-                    el.innerHTML = `
-                        <div>
-                            <p class="text-sm font-bold text-gray-700 dark:text-gray-300">${item.title}</p>
-                            <p class="text-xs text-gray-500">${count} বার পাঠ</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-bold text-emerald-600">+${reward}</p>
-                            <p class="text-xs text-gray-500">নেকি</p>
-                        </div>
-                    `;
-                    tasbihContainer.appendChild(el);
-                }
-            });
-            
-            if (todayTotalTasbih === 0) {
-                tasbihContainer.innerHTML = '<p class="text-sm text-gray-400 text-center p-4">আজ কোনো তাসবীহ পড়া হয়নি</p>';
-            }
-            
-            // Today's target details
-            const fixedItems = appData.items.filter(item => item.type === 'fixed');
-            fixedItems.forEach(item => {
-                todayTotalTargets++;
-                const isDone = appData.dailyCounts[item.id];
-                if (isDone) {
-                    todayCompletedTargets++;
-                    const reward = getReward(item);
-                    todayTargetNeki += reward;
-                    
-                    const el = document.createElement('div');
-                    el.className = 'flex justify-between items-center p-2 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800';
-                    el.innerHTML = `
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                            <div>
-                                <p class="text-sm font-bold text-green-700 dark:text-green-400">${item.title}</p>
-                                <p class="text-xs text-gray-500">সম্পূর্ণ</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-bold text-emerald-600">+${reward}</p>
-                            <p class="text-xs text-gray-500">নেকি</p>
-                        </div>
-                    `;
-                    targetContainer.appendChild(el);
-                } else {
-                    const el = document.createElement('div');
-                    el.className = 'flex justify-between items-center p-2 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800';
-                    el.innerHTML = `
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-times-circle text-red-500 text-sm"></i>
-                            <div>
-                                <p class="text-sm font-bold text-red-700 dark:text-red-400">${item.title}</p>
-                                <p class="text-xs text-gray-500">বাকি</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-bold text-gray-400">-</p>
-                            <p class="text-xs text-gray-500">নেকি</p>
-                        </div>
-                    `;
-                    targetContainer.appendChild(el);
-                }
-            });
-            
-            if (todayTotalTargets === 0) {
-                targetContainer.innerHTML = '<p class="text-sm text-gray-400 text-center p-4">কোনো টার্গেট আমল নেই</p>';
-            }
-            
-            // Update summary
-            document.getElementById('todayTotalTasbih').textContent = `${todayTotalTasbih} বার`;
-            document.getElementById('todayTotalTasbihNeki').textContent = todayTotalTasbihNeki.toLocaleString();
-            document.getElementById('todayCompletedTargets').textContent = `${todayCompletedTargets}/${todayTotalTargets}`;
-            document.getElementById('todayPendingTargets').textContent = `${todayTotalTargets - todayCompletedTargets}/${todayTotalTargets}`;
-            document.getElementById('todayTargetNeki').textContent = todayTargetNeki.toLocaleString();
-            
-            const todayTotalNeki = todayTotalTasbihNeki + todayTargetNeki;
-            document.getElementById('todayTotalNekiSummary').textContent = todayTotalNeki.toLocaleString();
         }
 
         // --- TIMER FUNCTIONS ---
@@ -1852,875 +1997,6 @@
             }
         }
 
-        // --- ATTENDANCE FUNCTIONS ---
-        function renderCalendar() {
-            const monthNames = ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
-            document.getElementById('currentMonth').textContent = `${monthNames[currentCalendarMonth]} ${currentCalendarYear}`;
-            
-            const firstDay = new Date(currentCalendarYear, currentCalendarMonth, 1);
-            const lastDay = new Date(currentCalendarYear, currentCalendarMonth + 1, 0);
-            const daysInMonth = lastDay.getDate();
-            const startingDay = firstDay.getDay();
-            
-            const calendarGrid = document.getElementById('calendarGrid');
-            calendarGrid.innerHTML = '';
-            
-            // Empty cells for days before the first day of month
-            for (let i = 0; i < startingDay; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'calendar-day';
-                calendarGrid.appendChild(emptyCell);
-            }
-            
-            const today = new Date();
-            const currentMonth = today.getMonth();
-            const currentYear = today.getFullYear();
-            const currentDate = today.getDate();
-            
-            // Days of the month
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayCell = document.createElement('div');
-                dayCell.className = 'calendar-day';
-                dayCell.textContent = day;
-                
-                const dateStr = new Date(currentCalendarYear, currentCalendarMonth, day).toDateString();
-                const isToday = currentCalendarYear === currentYear && currentCalendarMonth === currentMonth && day === currentDate;
-                
-                if (isToday) {
-                    dayCell.classList.add('today');
-                }
-                
-                if (appData.attendance.includes(dateStr)) {
-                    dayCell.classList.add('present');
-                } else if (new Date(dateStr) < today && !isToday) {
-                    dayCell.classList.add('absent');
-                } else {
-                    dayCell.classList.add('future');
-                }
-                
-                calendarGrid.appendChild(dayCell);
-            }
-            
-            // Update stats
-            const presentDays = appData.attendance.filter(date => {
-                const dateObj = new Date(date);
-                return dateObj.getMonth() === currentCalendarMonth && dateObj.getFullYear() === currentCalendarYear;
-            }).length;
-            
-            const totalDaysPassed = Math.min(daysInMonth, 
-                currentCalendarMonth === currentMonth && currentCalendarYear === currentYear ? currentDate : daysInMonth);
-            
-            const absentDays = totalDaysPassed - presentDays;
-            const attendanceRate = totalDaysPassed > 0 ? Math.round((presentDays / totalDaysPassed) * 100) : 0;
-            
-            document.getElementById('presentDays').textContent = `${presentDays} দিন`;
-            document.getElementById('absentDays').textContent = `${absentDays} দিন`;
-            document.getElementById('attendanceRate').textContent = `${attendanceRate}%`;
-        }
-
-        function changeMonth(delta) {
-            currentCalendarMonth += delta;
-            if (currentCalendarMonth > 11) {
-                currentCalendarMonth = 0;
-                currentCalendarYear++;
-            } else if (currentCalendarMonth < 0) {
-                currentCalendarMonth = 11;
-                currentCalendarYear--;
-            }
-            renderCalendar();
-        }
-
-        // --- PROGRESS ANALYSIS FUNCTIONS ---
-        function renderProgressCharts() {
-            // Week bar chart (changed from pie chart)
-            const weekDays = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
-            const weekData = [0, 0, 0, 0, 0, 0, 0];
-            
-            // Calculate activity per day of week from history (last 30 days)
-            const last30Days = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-            const recentHistory = appData.history.filter(h => new Date(h.date) >= last30Days);
-            
-            recentHistory.forEach(h => {
-                const date = new Date(h.date);
-                const dayOfWeek = date.getDay();
-                weekData[dayOfWeek] += h.neki || 0;
-            });
-            
-            // If no data, show equal distribution
-            const total = weekData.reduce((a, b) => a + b, 0);
-            if (total === 0) {
-                weekData.fill(1);
-            }
-            
-            const weekCtx = document.getElementById('weekPieChart').getContext('2d');
-            new Chart(weekCtx, {
-                type: 'bar',
-                data: {
-                    labels: weekDays,
-                    datasets: [{
-                        label: 'নেকি',
-                        data: weekData,
-                        backgroundColor: '#10b981',
-                        borderColor: '#059669',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            
-            // Monthly line chart
-            const monthData = Array(12).fill(0);
-            appData.history.forEach(h => {
-                const date = new Date(h.date);
-                const month = date.getMonth();
-                monthData[month] += h.neki || 0;
-            });
-            
-            const monthLabels = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
-            const monthCtx = document.getElementById('monthLineChart').getContext('2d');
-            new Chart(monthCtx, {
-                type: 'line',
-                data: {
-                    labels: monthLabels,
-                    datasets: [{
-                        label: 'মাসিক নেকি',
-                        data: monthData,
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-            
-            // Journal progress chart
-            const journalDates = appData.journal.slice(-30).reverse();
-            const journalLabels = journalDates.map(j => {
-                const date = new Date(j.date);
-                return `${date.getDate()}/${date.getMonth()+1}`;
-            });
-            const journalCounts = journalDates.map(() => 1);
-            
-            const journalCtx = document.getElementById('journalProgressChart').getContext('2d');
-            new Chart(journalCtx, {
-                type: 'line',
-                data: {
-                    labels: journalLabels,
-                    datasets: [{
-                        label: 'জার্নাল এন্ট্রি',
-                        data: journalCounts,
-                        borderColor: '#8b5cf6',
-                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- HISTORY ANALYSIS FUNCTIONS ---
-        function filterNekiHistory(period) {
-            const now = new Date();
-            let filteredData = [];
-            
-            if (period === 'week') {
-                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                filteredData = appData.history.filter(h => new Date(h.date) >= weekAgo);
-            } else if (period === 'month') {
-                const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-                filteredData = appData.history.filter(h => new Date(h.date) >= monthAgo);
-            } else if (period === 'year') {
-                const yearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-                filteredData = appData.history.filter(h => new Date(h.date) >= yearAgo);
-            }
-            
-            const totalNeki = filteredData.reduce((sum, h) => sum + (h.neki || 0), 0);
-            const avgNeki = filteredData.length > 0 ? Math.round(totalNeki / filteredData.length) : 0;
-            const maxNeki = filteredData.length > 0 ? Math.max(...filteredData.map(h => h.neki || 0)) : 0;
-            
-            document.getElementById('nekiHistoryStats').innerHTML = `
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">মোট নেকি:</span>
-                    <span class="font-bold text-emerald-600">${totalNeki.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">গড় নেকি/দিন:</span>
-                    <span class="font-bold text-emerald-600">${avgNeki.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">সর্বোচ্চ নেকি:</span>
-                    <span class="font-bold text-emerald-600">${maxNeki.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">মোট দিন:</span>
-                    <span class="font-bold text-emerald-600">${filteredData.length}</span>
-                </div>
-            `;
-        }
-
-        function filterJournalHistory(period) {
-            const now = new Date();
-            let filteredData = [];
-            
-            if (period === 'week') {
-                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                filteredData = appData.journal.filter(j => new Date(j.date) >= weekAgo);
-            } else if (period === 'month') {
-                const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-                filteredData = appData.journal.filter(j => new Date(j.date) >= monthAgo);
-            } else if (period === 'year') {
-                const yearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-                filteredData = appData.journal.filter(j => new Date(j.date) >= yearAgo);
-            }
-            
-            const totalEntries = filteredData.length;
-            const uniqueDates = [...new Set(filteredData.map(j => j.date))].length;
-            const avgEntries = uniqueDates > 0 ? (totalEntries / uniqueDates).toFixed(1) : 0;
-            
-            document.getElementById('journalHistoryStats').innerHTML = `
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">মোট এন্ট্রি:</span>
-                    <span class="font-bold text-purple-600">${totalEntries.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">দিনের সংখ্যা:</span>
-                    <span class="font-bold text-purple-600">${uniqueDates}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">গড় এন্ট্রি/দিন:</span>
-                    <span class="font-bold text-purple-600">${avgEntries}</span>
-                </div>
-            `;
-        }
-
-        // --- TARGET ANALYSIS FUNCTIONS (Updated with dates) ---
-        function renderTargetAnalysis() {
-            const fixedItems = appData.items.filter(item => item.type === 'fixed');
-            const today = new Date().toDateString();
-            
-            // Calculate completed targets
-            let totalCompleted = 0;
-            const completedTargets = [];
-            const missedTargets = [];
-            
-            fixedItems.forEach(item => {
-                const isDone = appData.dailyCounts[item.id];
-                if (isDone) {
-                    totalCompleted++;
-                    // Add completion date if not exists
-                    if (!appData.targetCompletion[item.id]) {
-                        appData.targetCompletion[item.id] = [];
-                    }
-                    if (!appData.targetCompletion[item.id].includes(today)) {
-                        appData.targetCompletion[item.id].push(today);
-                    }
-                    completedTargets.push({
-                        title: item.title,
-                        reward: getReward(item),
-                        lastCompleted: appData.targetCompletion[item.id] ? 
-                            appData.targetCompletion[item.id][appData.targetCompletion[item.id].length - 1] : today
-                    });
-                } else {
-                    missedTargets.push({
-                        title: item.title,
-                        reward: getReward(item),
-                        missedSince: appData.targetCompletion[item.id] ? 
-                            appData.targetCompletion[item.id][appData.targetCompletion[item.id].length - 1] : 'কখনো না'
-                    });
-                }
-            });
-            
-            const totalTargets = fixedItems.length;
-            
-            document.getElementById('weekTargets').textContent = `${totalCompleted}/${totalTargets}`;
-            document.getElementById('monthTargets').textContent = `${totalCompleted}/${totalTargets}`;
-            document.getElementById('totalTargets').textContent = `${totalCompleted}/${totalTargets}`;
-            
-            // Render missed targets list with dates
-            const missedList = document.getElementById('missedTargetsList');
-            missedList.innerHTML = '';
-            if (missedTargets.length === 0) {
-                missedList.innerHTML = '<p class="text-sm text-gray-500 text-center p-4">🎉 সব টার্গেট পূরন করেছেন!</p>';
-            } else {
-                missedTargets.forEach(target => {
-                    const el = document.createElement('div');
-                    el.className = 'p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800';
-                    el.innerHTML = `
-                        <p class="text-sm font-bold text-red-700 dark:text-red-400">${target.title}</p>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-xs text-gray-500">${target.reward} নেকি মিস</p>
-                            <p class="text-xs text-red-600">শেষবার: ${target.missedSince}</p>
-                        </div>
-                    `;
-                    missedList.appendChild(el);
-                });
-            }
-            
-            // Render completed targets list with dates
-            const completedList = document.getElementById('completedTargetsList');
-            completedList.innerHTML = '';
-            if (completedTargets.length === 0) {
-                completedList.innerHTML = '<p class="text-sm text-gray-500 text-center p-4">কোনো টার্গেট পূরন করা হয়নি</p>';
-            } else {
-                completedTargets.forEach(target => {
-                    const el = document.createElement('div');
-                    el.className = 'p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800';
-                    el.innerHTML = `
-                        <p class="text-sm font-bold text-green-700 dark:text-green-400">${target.title}</p>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="text-xs text-gray-500">${target.reward} নেকি অর্জিত</p>
-                            <p class="text-xs text-green-600">শেষবার: ${target.lastCompleted}</p>
-                        </div>
-                    `;
-                    completedList.appendChild(el);
-                });
-            }
-        }
-
-        // --- TIME SPENT ANALYSIS FUNCTIONS ---
-        function renderTimeSpentAnalysis() {
-            // Calculate total time spent
-            let totalSeconds = appData.focusTimer.totalSeconds;
-            Object.values(appData.timeSpent).forEach(tasbihData => {
-                Object.values(tasbihData).forEach(seconds => {
-                    totalSeconds += seconds;
-                });
-            });
-            
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            
-            document.getElementById('totalTasbihTime').textContent = `${hours} ঘন্টা ${minutes} মিনিট`;
-            
-            // Calculate today's time spent
-            const today = new Date().toDateString();
-            let todaySeconds = 0;
-            Object.values(appData.timeSpent).forEach(tasbihData => {
-                if (tasbihData[today]) {
-                    todaySeconds += tasbihData[today];
-                }
-            });
-            
-            const todayHours = Math.floor(todaySeconds / 3600);
-            const todayMinutes = Math.floor((todaySeconds % 3600) / 60);
-            
-            document.getElementById('todayTasbihTime').textContent = `${todayHours} ঘন্টা ${todayMinutes} মিনিট`;
-            
-            // Breakdown per tasbih for today
-            const breakdownContainer = document.getElementById('todayTasbihBreakdown');
-            breakdownContainer.innerHTML = '';
-            
-            const tasbihItems = appData.items.filter(item => item.type === 'counter');
-            tasbihItems.forEach(item => {
-                const tasbihSeconds = appData.timeSpent[item.id] ? appData.timeSpent[item.id][today] : 0;
-                if (tasbihSeconds > 0) {
-                    const tasbihMinutes = Math.round(tasbihSeconds / 60);
-                    const el = document.createElement('div');
-                    el.className = 'flex justify-between';
-                    el.innerHTML = `
-                        <span class="text-sm text-gray-600 dark:text-gray-400">${item.title}</span>
-                        <span class="text-sm font-bold text-emerald-600">${tasbihMinutes} মিনিট</span>
-                    `;
-                    breakdownContainer.appendChild(el);
-                }
-            });
-            
-            if (breakdownContainer.innerHTML === '') {
-                breakdownContainer.innerHTML = '<p class="text-sm text-gray-400 text-center">কোনো সময় ব্যয় করা হয়নি</p>';
-            }
-            
-            // Calculate averages
-            const attendanceDays = appData.attendance.length || 1;
-            const avgDailyMinutes = Math.round((totalSeconds / 60) / attendanceDays);
-            const avgWeeklyHours = Math.round((totalSeconds / 3600) / (attendanceDays / 7));
-            const avgMonthlyHours = Math.round((totalSeconds / 3600) / (attendanceDays / 30));
-            
-            document.getElementById('avgDailyTime').textContent = `${avgDailyMinutes} মিনিট`;
-            document.getElementById('avgWeeklyTime').textContent = `${avgWeeklyHours} ঘন্টা`;
-            document.getElementById('avgMonthlyTime').textContent = `${avgMonthlyHours} ঘন্টা`;
-            
-            // Create time spent chart (last 7 days)
-            const last7Days = [];
-            const timeData = [];
-            
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dateStr = date.toDateString();
-                last7Days.push(dateStr.substring(4, 10));
-                
-                let daySeconds = 0;
-                Object.values(appData.timeSpent).forEach(tasbihData => {
-                    if (tasbihData[dateStr]) {
-                        daySeconds += tasbihData[dateStr];
-                    }
-                });
-                timeData.push(Math.round(daySeconds / 60)); // Convert to minutes
-            }
-            
-            const timeCtx = document.getElementById('timeSpentChart').getContext('2d');
-            if (window.timeChart) window.timeChart.destroy();
-            window.timeChart = new Chart(timeCtx, {
-                type: 'bar',
-                data: {
-                    labels: last7Days,
-                    datasets: [{
-                        label: 'মিনিট',
-                        data: timeData,
-                        backgroundColor: '#10b981',
-                        borderColor: '#059669',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- TASBIH RECITATION FUNCTIONS ---
-        function renderTasbihRecitation() {
-            const tasbihItems = appData.items.filter(item => item.type === 'counter');
-            const container = document.getElementById('tasbihStatsList');
-            container.innerHTML = '';
-            
-            if (tasbihItems.length === 0) {
-                container.innerHTML = '<p class="text-sm text-gray-500 text-center p-4">কোনো তাসবীহ নেই</p>';
-                return;
-            }
-            
-            let totalTasbihCount = 0;
-            let totalEstimatedNeki = 0;
-            
-            tasbihItems.forEach(item => {
-                const totalCount = appData.dailyCounts[item.id] || 0;
-                const estimatedNeki = totalCount * 10; // Assuming 10 neki per tasbih
-                totalTasbihCount += totalCount;
-                totalEstimatedNeki += estimatedNeki;
-                
-                const el = document.createElement('div');
-                el.className = 'p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700';
-                el.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-bold text-gray-700 dark:text-gray-300">${item.title}</p>
-                            <p class="text-xs text-gray-500">মোট পাঠ: ${totalCount.toLocaleString()}</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-bold text-emerald-600">${estimatedNeki.toLocaleString()} নেকি</p>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(el);
-            });
-            
-            document.getElementById('estimatedNeki').textContent = totalEstimatedNeki.toLocaleString();
-            
-            // Initialize period stats
-            filterTasbih('week');
-        }
-
-        function filterTasbih(period) {
-            const now = new Date();
-            let startDate;
-            
-            if (period === 'week') {
-                startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-            } else if (period === 'month') {
-                startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-            } else if (period === 'year') {
-                startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-            }
-            
-            // For simplicity, we'll show total counts
-            // In a real implementation, you'd filter by date
-            const tasbihItems = appData.items.filter(item => item.type === 'counter');
-            let periodCount = 0;
-            
-            tasbihItems.forEach(item => {
-                periodCount += appData.dailyCounts[item.id] || 0;
-            });
-            
-            // Adjust based on period (simplified)
-            let adjustedCount = periodCount;
-            if (period === 'week') adjustedCount = Math.floor(periodCount / 4);
-            if (period === 'month') adjustedCount = periodCount;
-            if (period === 'year') adjustedCount = periodCount * 12;
-            
-            const periodEstimatedNeki = adjustedCount * 10;
-            
-            document.getElementById('tasbihPeriodStats').innerHTML = `
-                <div class="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-100 dark:border-yellow-800">
-                    <div class="flex justify-between mb-2">
-                        <span class="text-sm text-gray-600 dark:text-gray-400">মোট পাঠ:</span>
-                        <span class="font-bold text-emerald-600">${adjustedCount.toLocaleString()}</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-sm text-gray-600 dark:text-gray-400">সম্ভাব্য নেকি:</span>
-                        <span class="font-bold text-emerald-600">${periodEstimatedNeki.toLocaleString()}</span>
-                    </div>
-                </div>
-            `;
-        }
-
-        // --- WASTAGE ANALYSIS FUNCTIONS ---
-        function renderWastageAnalysis() {
-            if (appData.phoneUsage.length === 0) {
-                document.getElementById('view-wastage').innerHTML = `
-                    <div class="text-center p-10">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">সময় অপচয় বিশ্লেষণ</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">ফোন ব্যবহারের ডাটা পাওয়া যায়নি।</p>
-                        <button onclick="navigate('analysis')" class="px-6 py-2 bg-emerald-600 text-white rounded-lg">
-                            বিশ্লেষণে ফিরে যান
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Calculate daily average
-            let totalMinutes = 0;
-            appData.phoneUsage.forEach(usage => {
-                totalMinutes += usage.totalMinutes;
-            });
-            
-            const dailyAvgMinutes = appData.phoneUsage.length > 0 ? 
-                Math.round(totalMinutes / appData.phoneUsage.length) : 0;
-            const dailyAvgHours = Math.floor(dailyAvgMinutes / 60);
-            const dailyAvgMins = dailyAvgMinutes % 60;
-            
-            // Project wastage
-            const weeklyWastage = Math.round((dailyAvgMinutes * 7) / 60);
-            const monthlyWastage = Math.round((dailyAvgMinutes * 30) / 60);
-            const yearlyWastage = Math.round((dailyAvgMinutes * 365) / 60);
-            
-            document.getElementById('dailyAvgPhoneUse').textContent = 
-                `${dailyAvgHours} ঘন্টা ${dailyAvgMins} মিনিট`;
-            document.getElementById('weeklyWastage').textContent = `${weeklyWastage} ঘন্টা`;
-            document.getElementById('monthlyWastage').textContent = `${monthlyWastage} ঘন্টা`;
-            document.getElementById('yearlyWastage').textContent = `${yearlyWastage} ঘন্টা`;
-            
-            // Yesterday's usage
-            const yesterday = new Date(Date.now() - 86400000).toDateString();
-            const yesterdayUsage = appData.phoneUsage.find(u => u.date === yesterday);
-            if (yesterdayUsage) {
-                document.getElementById('yesterdayPhoneUse').textContent = 
-                    `${yesterdayUsage.hours} ঘন্টা ${yesterdayUsage.minutes} মিনিট`;
-                
-                // Potential tasbih count (assuming 5 seconds per tasbih)
-                const totalSeconds = (yesterdayUsage.hours * 3600) + (yesterdayUsage.minutes * 60);
-                const potentialTasbih = Math.floor(totalSeconds / 5);
-                document.getElementById('potentialTasbihCount').textContent = potentialTasbih.toLocaleString();
-            }
-            
-            // Last week and month stats
-            const last7Days = appData.phoneUsage.slice(-7);
-            const last30Days = appData.phoneUsage.slice(-30);
-            
-            const weeklyTotalMinutes = last7Days.reduce((sum, u) => sum + u.totalMinutes, 0);
-            const monthlyTotalMinutes = last30Days.reduce((sum, u) => sum + u.totalMinutes, 0);
-            
-            const weeklyAvg = last7Days.length > 0 ? Math.round(weeklyTotalMinutes / last7Days.length / 60 * 10) / 10 : 0;
-            const monthlyAvg = last30Days.length > 0 ? Math.round(monthlyTotalMinutes / last30Days.length / 60 * 10) / 10 : 0;
-            
-            document.getElementById('weeklyAvgUse').textContent = `${weeklyAvg} ঘন্টা/দিন`;
-            document.getElementById('monthlyAvgUse').textContent = `${monthlyAvg} ঘন্টা/দিন`;
-            document.getElementById('lastWeekTotal').textContent = `${Math.round(weeklyTotalMinutes / 60)} ঘন্টা`;
-            document.getElementById('lastMonthTotal').textContent = `${Math.round(monthlyTotalMinutes / 60)} ঘন্টা`;
-            
-            // Create phone usage chart
-            const chartLabels = [];
-            const chartData = [];
-            
-            // Last 7 days data
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dateStr = date.toDateString();
-                chartLabels.push(dateStr.substring(4, 10));
-                
-                const usage = appData.phoneUsage.find(u => u.date === dateStr);
-                chartData.push(usage ? Math.round(usage.totalMinutes / 60 * 10) / 10 : 0);
-            }
-            
-            const phoneCtx = document.getElementById('phoneUsageChart').getContext('2d');
-            if (window.phoneChart) window.phoneChart.destroy();
-            window.phoneChart = new Chart(phoneCtx, {
-                type: 'line',
-                data: {
-                    labels: chartLabels,
-                    datasets: [{
-                        label: 'ঘন্টা/দিন',
-                        data: chartData,
-                        borderColor: '#ef4444',
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'ঘন্টা'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // --- MANAGE LIST LOGIC ---
-        let currentManageType = '';
-        function openManageModal(type) {
-            currentManageType = type;
-            document.getElementById('manageModal').classList.remove('hidden');
-            renderManageList();
-        }
-        
-        function closeManageModal() { 
-            document.getElementById('manageModal').classList.add('hidden'); 
-        }
-        
-        function renderManageList() {
-            const container = document.getElementById('manageListContainer');
-            container.innerHTML = '';
-            
-            const items = appData.items.filter(c => c.type === currentManageType);
-            
-            if(items.length === 0) {
-                container.innerHTML = `<p class="text-center text-gray-400 text-sm mt-4">কোনো ফাইল নেই।</p>`;
-                return;
-            }
-
-            items.forEach(d => {
-                const el = document.createElement('div');
-                el.className = "flex justify-between items-center bg-gray-50 dark:bg-slate-800 p-3 rounded-xl border border-gray-100 dark:border-slate-700";
-                
-                let dayText = 'প্রতিদিন';
-                if(Array.isArray(d.days)) {
-                    const dayNames = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
-                    dayText = d.days.map(i => dayNames[i]).join(', ');
-
-                }
-
-                el.innerHTML = `
-                    <div class="flex-1 overflow-hidden mr-2">
-                        <h4 class="font-bold text-gray-700 dark:text-gray-300 text-sm truncate">${d.title}</h4>
-                        <p class="text-[10px] text-gray-400 truncate">${dayText}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="editItem('${d.id}')" class="text-blue-400 hover:text-blue-600 w-8 h-8 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 rounded-full"><i class="fas fa-pen"></i></button>
-                        <button onclick="delItem('${d.id}')" class="text-red-400 hover:text-red-600 w-8 h-8 flex items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-full"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                `;
-                container.appendChild(el);
-            });
-        }
-
-        // --- SIMPLE COUNTER LOGIC ---
-        function openSimpleCounter() {
-            simpleCounterValue = 0;
-            document.getElementById('simpleCountDisplay').innerText = "0";
-            document.getElementById('view-simple-counter').classList.remove('hidden');
-        }
-        
-        function closeSimpleCounter() {
-            document.getElementById('view-simple-counter').classList.add('hidden');
-        }
-        
-        function incrementSimple() {
-            simpleCounterValue++;
-            document.getElementById('simpleCountDisplay').innerText = simpleCounterValue;
-            if(navigator.vibrate) navigator.vibrate(20);
-        }
-        
-        function resetSimple() {
-            if(confirm('রিসেট করবেন?')) {
-                simpleCounterValue = 0;
-                document.getElementById('simpleCountDisplay').innerText = "0";
-            }
-        }
-
-        // --- ADD/EDIT ITEM LOGIC ---
-        function openAddModal(t) { 
-            currentAddType = t; 
-            document.getElementById('addModal').classList.remove('hidden'); 
-            document.getElementById('modalTitle').innerText = 'নতুন আমল যুক্ত করুন';
-            document.getElementById('modalTypeBadge').innerText = t==='counter'?'তাসবীহ':'ফিক্সড আমল'; 
-            document.getElementById('saveBtn').innerText = 'লিস্টে সেভ করুন';
-            
-            document.getElementById('editId').value = '';
-            document.getElementById('addTitle').value = '';
-            document.getElementById('addArabic').value = '';
-            document.getElementById('addBangla').value = '';
-            document.getElementById('addPreview').innerText = 'নেকি: 0';
-            document.getElementById('scheduleSelect').value = 'daily';
-            document.getElementById('daySelectionArea').classList.add('hidden');
-            document.querySelectorAll('.day-checkbox').forEach(c => c.checked = false);
-        }
-
-        function editItem(id) {
-            const item = appData.items.find(i => i.id == id);
-            if(!item) return;
-
-            currentAddType = item.type;
-            document.getElementById('manageModal').classList.add('hidden'); 
-            document.getElementById('addModal').classList.remove('hidden'); 
-            
-            document.getElementById('modalTitle').innerText = 'আমল এডিট করুন';
-            document.getElementById('modalTypeBadge').innerText = item.type==='counter'?'তাসবীহ':'ফিক্সড আমল';
-            document.getElementById('saveBtn').innerText = 'আপডেট করুন';
-            
-            document.getElementById('editId').value = item.id;
-            document.getElementById('addTitle').value = item.title;
-            document.getElementById('addArabic').value = item.arabic || '';
-            document.getElementById('addBangla').value = item.bangla || '';
-            document.getElementById('addPreview').innerText = `নেকি: ${getReward(item)}`;
-            
-            if(Array.isArray(item.days)) {
-                document.getElementById('scheduleSelect').value = 'weekly';
-                document.getElementById('daySelectionArea').classList.remove('hidden');
-                document.querySelectorAll('.day-checkbox').forEach(c => {
-                    c.checked = item.days.includes(parseInt(c.value));
-                });
-            } else {
-                document.getElementById('scheduleSelect').value = 'daily';
-                document.getElementById('daySelectionArea').classList.add('hidden');
-            }
-        }
-
-        function closeAddModal() { 
-            document.getElementById('addModal').classList.add('hidden'); 
-        }
-        
-        function toggleDayInputs() {
-            const val = document.getElementById('scheduleSelect').value;
-            const area = document.getElementById('daySelectionArea');
-            if(val === 'weekly') area.classList.remove('hidden'); 
-            else area.classList.add('hidden');
-        }
-
-        document.getElementById('addArabic').addEventListener('input', e => { 
-            document.getElementById('addPreview').innerText = `নেকি: ${getReward({arabic:e.target.value})}`; 
-        });
-        
-        function saveItem() { 
-            const editId = document.getElementById('editId').value;
-            const t = document.getElementById('addTitle').value; 
-            const arabic = document.getElementById('addArabic').value;
-            const bangla = document.getElementById('addBangla').value;
-            const scheduleType = document.getElementById('scheduleSelect').value;
-            
-            let selectedDays = 'daily';
-            if(scheduleType === 'weekly') {
-                const checked = document.querySelectorAll('.day-checkbox:checked');
-                selectedDays = Array.from(checked).map(c => parseInt(c.value));
-                if(selectedDays.length === 0) { 
-                    alert("অন্তত একটি দিন সিলেক্ট করুন!"); 
-                    return; 
-                }
-            }
-
-            if(!t){ 
-                alert("অন্তত নাম (টাইটেল) দিতে হবে!"); 
-                return; 
-            }
-
-            if(editId) {
-                const idx = appData.items.findIndex(i => i.id == editId);
-                if(idx > -1) {
-                    appData.items[idx].title = t;
-                    appData.items[idx].arabic = arabic;
-                    appData.items[idx].bangla = bangla;
-                    appData.items[idx].days = selectedDays;
-                }
-            } else {
-                const id = 'c_'+Date.now(); 
-                appData.items.push({
-                    id, title: t, arabic: arabic, bangla: bangla, type: currentAddType, days: selectedDays
-                }); 
-                appData.dailyCounts[id] = currentAddType==='counter'?0:false; 
-            }
-            
-            saveData(); 
-            renderAll(); 
-            closeAddModal(); 
-        }
-        
-        function delItem(id) { 
-            if(confirm('মুছে ফেলতে চান?')){ 
-                appData.items = appData.items.filter(c=>c.id != id); 
-                delete appData.dailyCounts[id]; 
-                saveData(); 
-                renderAll(); 
-                renderManageList();
-            } 
-        }
-        
-        function addJournal() { 
-            const t = document.getElementById('journalInput').value; 
-            if(t){ 
-                appData.journal.unshift({
-                    id:Date.now(), 
-                    text:t, 
-                    date:new Date().toLocaleDateString()
-                }); 
-                appData.totalXp += 50; 
-                document.getElementById('journalInput').value=''; 
-                saveData(); 
-                markAttendance();
-                alert("জার্নালে সেভ হয়েছে!");
-            } 
-        }
-        
-        function openHistoryModal() {
-            const list = document.getElementById('historyList');
-            document.getElementById('historyCount').innerText = appData.journal.length;
-            if(appData.journal.length === 0) {
-                list.innerHTML = `<p class="text-center text-gray-400 mt-10">কোনো ইতিহাস পাওয়া যায়নি</p>`;
-            } else {
-                list.innerHTML = appData.journal.map(j => {
-                    const dateObj = new Date(j.id);
-                    return `<div class="p-4 bg-gray-50 dark:bg-[#0f172a] rounded-xl border border-gray-100 dark:border-slate-800"><p class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-1">${j.text}</p><div class="flex items-center text-[10px] text-gray-400 gap-2"><span>${dateObj.toLocaleDateString()}</span></div></div>`;
-                }).join('');
-            }
-            document.getElementById('historyModal').classList.remove('hidden');
-        }
-        
-        function closeHistoryModal() { 
-            document.getElementById('historyModal').classList.add('hidden'); 
-        }
-        
         // --- TREE AND FOCUS MODE FUNCTIONS ---
         function initTreeCanvas() { 
             canvas = document.getElementById('treeCanvas'); 
@@ -2922,12 +2198,12 @@
             
             saveData();
             
-            // Show toast and confetti for every 100 counts
+            // Show toast and confetti for every 100 counts - Simplified toast
             if (appData.dailyCounts[task.id] % 100 === 0) {
                 if (navigator.vibrate) {
                     navigator.vibrate([100, 50, 100, 50, 200]);
                 }
-                showToast("মাশাআল্লাহ! ১০০ বার পূর্ণ হয়েছে!");
+                showToast("মাশাআল্লাহ!"); // Simplified message
                 showConfetti();
             }
             
@@ -3000,79 +2276,229 @@
             document.getElementById('detailsModal').classList.add('hidden'); 
         }
         
-        // --- CHARTS ---
-        let c1, c2; 
-        function loadCharts() {
-            const l = [...appData.history.map(h=>h.date.split(' ')[0]), 'Today'];
-            const textColor = isDarkMode ? '#cbd5e1' : '#666'; 
-            const gridColor = isDarkMode ? '#334155' : '#ddd';
+        // --- SIMPLE COUNTER LOGIC ---
+        function openSimpleCounter() {
+            simpleCounterValue = 0;
+            document.getElementById('simpleCountDisplay').innerText = "0";
+            document.getElementById('view-simple-counter').classList.remove('hidden');
+        }
+        
+        function closeSimpleCounter() {
+            document.getElementById('view-simple-counter').classList.add('hidden');
+        }
+        
+        function incrementSimple() {
+            simpleCounterValue++;
+            document.getElementById('simpleCountDisplay').innerText = simpleCounterValue;
+            if(navigator.vibrate) navigator.vibrate(20);
+        }
+        
+        function resetSimple() {
+            if(confirm('রিসেট করবেন?')) {
+                simpleCounterValue = 0;
+                document.getElementById('simpleCountDisplay').innerText = "0";
+            }
+        }
+
+        // --- ADD/EDIT ITEM LOGIC ---
+        function openAddModal(t) { 
+            currentAddType = t; 
+            document.getElementById('addModal').classList.remove('hidden'); 
+            document.getElementById('modalTitle').innerText = 'নতুন আমল যুক্ত করুন';
+            document.getElementById('modalTypeBadge').innerText = t==='counter'?'তাসবীহ':'ফিক্সড আমল'; 
+            document.getElementById('saveBtn').innerText = 'লিস্টে সেভ করুন';
             
-            if(c1) c1.destroy(); 
-            c1 = new Chart(document.getElementById('nekiChart'), { 
-                type:'line', 
-                data:{
-                    labels:l, 
-                    datasets:[{
-                        label:'Neki', 
-                        data:[...appData.history.map(h=>h.neki), appData.totalNeki], 
-                        borderColor:'#10b981', 
-                        tension:0.4, 
-                        backgroundColor: isDarkMode ? 'rgba(16, 185, 129, 0.1)' : 'rgba(16, 185, 129, 0.1)', 
-                        fill:true
-                    }]
-                }, 
-                options: { 
-                    scales: { 
-                        x: { 
-                            ticks: { color: textColor }, 
-                            grid: { color: gridColor } 
-                        }, 
-                        y: { 
-                            ticks: { color: textColor }, 
-                            grid: { color: gridColor } 
-                        } 
-                    }, 
-                    plugins: { 
-                        legend: { 
-                            labels: { color: textColor } 
-                        } 
-                    } 
-                } 
-            });
+            document.getElementById('editId').value = '';
+            document.getElementById('addTitle').value = '';
+            document.getElementById('addArabic').value = '';
+            document.getElementById('addBangla').value = '';
+            document.getElementById('addPreview').innerText = 'নেকি: 0';
+            document.getElementById('scheduleSelect').value = 'daily';
+            document.getElementById('daySelectionArea').classList.add('hidden');
+            document.querySelectorAll('.day-checkbox').forEach(c => c.checked = false);
+        }
+
+        function editItem(id) {
+            const item = appData.items.find(i => i.id == id);
+            if(!item) return;
+
+            currentAddType = item.type;
+            document.getElementById('manageModal').classList.add('hidden'); 
+            document.getElementById('addModal').classList.remove('hidden'); 
             
-            if(c2) c2.destroy(); 
-            c2 = new Chart(document.getElementById('xpChart'), { 
-                type:'line', 
-                data:{
-                    labels:l, 
-                    datasets:[{
-                        label:'XP', 
-                        data:[...appData.history.map(h=>(h.xp||0)), appData.totalXp], 
-                        borderColor:'#3b82f6', 
-                        tension:0.4, 
-                        backgroundColor: isDarkMode ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)', 
-                        fill:true
-                    }]
-                }, 
-                options: { 
-                    scales: { 
-                        x: { 
-                            ticks: { color: textColor }, 
-                            grid: { color: gridColor } 
-                        }, 
-                        y: { 
-                            ticks: { color: textColor }, 
-                            grid: { color: gridColor } 
-                        } 
-                    }, 
-                    plugins: { 
-                        legend: { 
-                            labels: { color: textColor } 
-                        } 
-                    } 
-                } 
+            document.getElementById('modalTitle').innerText = 'আমল এডিট করুন';
+            document.getElementById('modalTypeBadge').innerText = item.type==='counter'?'তাসবীহ':'ফিক্সড আমল';
+            document.getElementById('saveBtn').innerText = 'আপডেট করুন';
+            
+            document.getElementById('editId').value = item.id;
+            document.getElementById('addTitle').value = item.title;
+            document.getElementById('addArabic').value = item.arabic || '';
+            document.getElementById('addBangla').value = item.bangla || '';
+            document.getElementById('addPreview').innerText = `নেকি: ${getReward(item)}`;
+            
+            if(Array.isArray(item.days)) {
+                document.getElementById('scheduleSelect').value = 'weekly';
+                document.getElementById('daySelectionArea').classList.remove('hidden');
+                document.querySelectorAll('.day-checkbox').forEach(c => {
+                    c.checked = item.days.includes(parseInt(c.value));
+                });
+            } else {
+                document.getElementById('scheduleSelect').value = 'daily';
+                document.getElementById('daySelectionArea').classList.add('hidden');
+            }
+        }
+
+        function closeAddModal() { 
+            document.getElementById('addModal').classList.add('hidden'); 
+        }
+        
+        function toggleDayInputs() {
+            const val = document.getElementById('scheduleSelect').value;
+            const area = document.getElementById('daySelectionArea');
+            if(val === 'weekly') area.classList.remove('hidden'); 
+            else area.classList.add('hidden');
+        }
+
+        document.getElementById('addArabic').addEventListener('input', e => { 
+            document.getElementById('addPreview').innerText = `নেকি: ${getReward({arabic:e.target.value})}`; 
+        });
+        
+        function saveItem() { 
+            const editId = document.getElementById('editId').value;
+            const t = document.getElementById('addTitle').value; 
+            const arabic = document.getElementById('addArabic').value;
+            const bangla = document.getElementById('addBangla').value;
+            const scheduleType = document.getElementById('scheduleSelect').value;
+            
+            let selectedDays = 'daily';
+            if(scheduleType === 'weekly') {
+                const checked = document.querySelectorAll('.day-checkbox:checked');
+                selectedDays = Array.from(checked).map(c => parseInt(c.value));
+                if(selectedDays.length === 0) { 
+                    alert("অন্তত একটি দিন সিলেক্ট করুন!"); 
+                    return; 
+                }
+            }
+
+            if(!t){ 
+                alert("অন্তত নাম (টাইটেল) দিতে হবে!"); 
+                return; 
+            }
+
+            if(editId) {
+                const idx = appData.items.findIndex(i => i.id == editId);
+                if(idx > -1) {
+                    appData.items[idx].title = t;
+                    appData.items[idx].arabic = arabic;
+                    appData.items[idx].bangla = bangla;
+                    appData.items[idx].days = selectedDays;
+                }
+            } else {
+                const id = 'c_'+Date.now(); 
+                appData.items.push({
+                    id, title: t, arabic: arabic, bangla: bangla, type: currentAddType, days: selectedDays
+                }); 
+                appData.dailyCounts[id] = currentAddType==='counter'?0:false; 
+            }
+            
+            saveData(); 
+            renderAll(); 
+            closeAddModal(); 
+        }
+        
+        function delItem(id) { 
+            if(confirm('মুছে ফেলতে চান?')){ 
+                appData.items = appData.items.filter(c=>c.id != id); 
+                delete appData.dailyCounts[id]; 
+                saveData(); 
+                renderAll(); 
+                renderManageList();
+            } 
+        }
+        
+        function addJournal() { 
+            const t = document.getElementById('journalInput').value; 
+            if(t){ 
+                appData.journal.unshift({
+                    id:Date.now(), 
+                    text:t, 
+                    date:new Date().toLocaleDateString()
+                }); 
+                appData.totalXp += 50; 
+                document.getElementById('journalInput').value=''; 
+                saveData(); 
+                markAttendance();
+                alert("জার্নালে সেভ হয়েছে!");
+            } 
+        }
+        
+        function openHistoryModal() {
+            const list = document.getElementById('historyList');
+            document.getElementById('historyCount').innerText = appData.journal.length;
+            if(appData.journal.length === 0) {
+                list.innerHTML = `<p class="text-center text-gray-400 mt-10">কোনো ইতিহাস পাওয়া যায়নি</p>`;
+            } else {
+                list.innerHTML = appData.journal.map(j => {
+                    const dateObj = new Date(j.id);
+                    return `<div class="p-4 bg-gray-50 dark:bg-[#0f172a] rounded-xl border border-gray-100 dark:border-slate-800"><p class="font-bold text-gray-800 dark:text-gray-200 text-sm mb-1">${j.text}</p><div class="flex items-center text-[10px] text-gray-400 gap-2"><span>${dateObj.toLocaleDateString()}</span></div></div>`;
+                }).join('');
+            }
+            document.getElementById('historyModal').classList.remove('hidden');
+        }
+        
+        function closeHistoryModal() { 
+            document.getElementById('historyModal').classList.add('hidden'); 
+        }
+        
+        // --- MANAGE LIST LOGIC ---
+        let currentManageType = '';
+        function openManageModal(type) {
+            currentManageType = type;
+            document.getElementById('manageModal').classList.remove('hidden');
+            renderManageList();
+        }
+        
+        function closeManageModal() { 
+            document.getElementById('manageModal').classList.add('hidden'); 
+        }
+        
+        function renderManageList() {
+            const container = document.getElementById('manageListContainer');
+            container.innerHTML = '';
+            
+            const items = appData.items.filter(c => c.type === currentManageType);
+            
+            if(items.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-400 text-sm mt-4">কোনো ফাইল নেই।</p>`;
+                return;
+            }
+
+            items.forEach(d => {
+                const el = document.createElement('div');
+                el.className = "flex justify-between items-center bg-gray-50 dark:bg-slate-800 p-3 rounded-xl border border-gray-100 dark:border-slate-700";
+                
+                let dayText = 'প্রতিদিন';
+                if(Array.isArray(d.days)) {
+                    const dayNames = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
+                    dayText = d.days.map(i => dayNames[i]).join(', ');
+
+                }
+
+                el.innerHTML = `
+                    <div class="flex-1 overflow-hidden mr-2">
+                        <h4 class="font-bold text-gray-700 dark:text-gray-300 text-sm truncate">${d.title}</h4>
+                        <p class="text-[10px] text-gray-400 truncate">${dayText}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="editItem('${d.id}')" class="text-blue-400 hover:text-blue-600 w-8 h-8 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20 rounded-full"><i class="fas fa-pen"></i></button>
+                        <button onclick="delItem('${d.id}')" class="text-red-400 hover:text-red-600 w-8 h-8 flex items-center justify-center bg-red-50 dark:bg-red-900/20 rounded-full"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                container.appendChild(el);
             });
         }
     </script>
 </body>
-    </html>
+</html>
+
+
